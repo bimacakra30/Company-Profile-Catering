@@ -1,20 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const AdminPanel = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/");
-    };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
 
-    return (
-        <div className="container">
-            <h2>Welcome to Admin Panel</h2>
-            <button className="login-btn" onClick={handleLogout}>Logout</button>
-        </div>
-    );
+  return (
+    <div>
+      <Navbar />
+      <h2>Selamat Datang di Admin Panel</h2>
+    </div>
+  );
 };
 
 export default AdminPanel;

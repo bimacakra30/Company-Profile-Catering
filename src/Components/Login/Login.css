@@ -3,7 +3,7 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+    background: white;
     margin: 0;
     font-family: Arial, sans-serif;
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
-import Login from "./Components/Login/Login";
-import AdminPanel from "./Components/AdminPanel/AdminPanel";
+import Login from "./Components/Login/Login.jsx";
+import AdminPanel from "./Components/AdminPanel/AdminPanel.jsx";
 
 const App = () => {
   return (

@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
-const bcrypt = require('bcryptjs');
+const crypto = require('crypto'); // Gunakan untuk MD5 hashing
 const jwt = require('jsonwebtoken');
 
 const app = express();
@@ -26,50 +26,46 @@ db.connect((err) => {
     }
 });
 
-// Endpoint login
+// Endpoint login dengan MD5
 app.post('/login', (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
-        return res.status(400).json({ message: "Email and password are required" });
+    if (!username || !password) {
+        return res.status(400).json({ message: "Username and password are required" });
     }
 
-    const sql = "SELECT * FROM users WHERE email = ?";
-    db.query(sql, [email], async (err, results) => {
+    const sql = "SELECT * FROM user WHERE username = ?";
+    db.query(sql, [username], (err, results) => {
         if (err) {
             console.error("Database query error:", err);
             return res.status(500).json({ message: "Server error" });
         }
 
         if (results.length === 0) {
-            return res.status(401).json({ message: "Invalid email or password" });
+            return res.status(401).json({ message: "Invalid username or password" });
         }
 
         const user = results[0];
 
-        try {
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return res.status(401).json({ message: "Invalid email or password" });
-            }
+        // Hash password input dengan MD5 untuk dicocokkan dengan database
+        const hashedPassword = crypto.createHash('md5').update(password).digest("hex");
 
-            // Buat token JWT
-            const token = jwt.sign(
-                { id: user.id, email: user.email },
-                process.env.JWT_SECRET,
-                { expiresIn: '1h' }
-            );
-
-            res.json({
-                message: "Login successful",
-                token,
-                user: { id: user.id, email: user.email }
-            });
-
-        } catch (error) {
-            console.error("Error comparing passwords:", error);
-            return res.status(500).json({ message: "Error processing login" });
+        if (hashedPassword !== user.password) {
+            return res.status(401).json({ message: "Invalid username or password" });
         }
+
+        // Buat token JWT
+        const token = jwt.sign(
+            { id: user.id_user, username: user.username, level: user.level },
+            process.env.JWT_SECRET,
+            { expiresIn: '1h' }
+        );
+
+        res.json({
+            message: "Login successful",
+            token,
+            user: { id: user.id_user, username: user.username, level: user.level }
+        });
     });
 });
 

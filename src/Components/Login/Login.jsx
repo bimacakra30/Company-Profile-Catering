@@ -7,30 +7,27 @@ import user_icon from "../Assets/user.png";
 import password_icon from "../Assets/password.png";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState(""); // Untuk menampilkan error
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        setErrorMessage(""); // Reset error message sebelum mencoba login
+        setErrorMessage(""); 
 
         try {
-            const response = await axios.post("http://localhost:5001/login", { email, password });
+            // Kirim password dalam bentuk teks biasa, biarkan backend yang meng-hash dengan MD5
+            const response = await axios.post("http://localhost:5001/login", { username, password });
 
             if (response.data.token) {
                 localStorage.setItem("token", response.data.token);
-                navigate("/admin"); // Arahkan ke halaman admin jika berhasil login
+                navigate("/admin"); 
             } else {
                 setErrorMessage("Login failed! Invalid response from server.");
             }
         } catch (error) {
-            if (error.response && error.response.data.message) {
-                setErrorMessage(error.response.data.message);
-            } else {
-                setErrorMessage("Login failed! Please try again.");
-            }
+            setErrorMessage(error.response?.data?.message || "Login failed! Please try again.");
         }
     };
 
@@ -45,10 +42,10 @@ const Login = () => {
                     <div className="input">
                         <img src={user_icon} alt="User Icon" />
                         <input
-                            type="email"
-                            placeholder="Enter your email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            placeholder="Enter your username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>
@@ -64,7 +61,7 @@ const Login = () => {
                     </div>
                 </div>
 
-                {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Tampilkan pesan error */}
+                {errorMessage && <p className="error-message">{errorMessage}</p>} 
 
                 <button type="submit" className="login-btn">Login</button>
             </form>

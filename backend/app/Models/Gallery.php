@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Gallery extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    protected $primaryKey = 'id_user';
+    protected $table = 'gallery';
+    protected $primaryKey = 'id_gallery';
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'username', 'password', 'level', 'status'
-    ];
-
-    protected $hidden = [
-        'password',
+        'path_image', 'name_event', 'date'
     ];
 }

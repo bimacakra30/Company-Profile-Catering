@@ -9,7 +9,6 @@
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
-
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -19,6 +18,7 @@
                 <a href="#" class="nav-link">Home</a>
             </li>
         </ul>
+        
 
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -62,7 +62,7 @@
             <div class="container-fluid">
                 <div class="card">
                     <div class="card-body">
-                    <h5>Selamat datang, {{ Auth::user()->nama ?? 'User' }}!</h5>
+                    <h5>Selamat datang, {{ Auth::user()->name ?? 'User' }}!</h5>
                         <p>Anda berhasil login.</p>
                     </div>
                 </div>

@@ -15,7 +15,7 @@ class Gallery extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'path_image', 'name_event', 'date'
+        'path_image', 'name_event', 'date', 'id_user'
     ];
 
     public function user()

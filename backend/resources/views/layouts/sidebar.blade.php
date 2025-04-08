@@ -14,7 +14,7 @@
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'bg-primary' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
-                        <p> Manajemen User </p>
+                        <p> Management User </p>
                     </a>
                 </li>
                 <li class="nav-item">

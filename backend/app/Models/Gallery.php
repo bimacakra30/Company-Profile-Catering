@@ -17,4 +17,9 @@ class Gallery extends Authenticatable
     protected $fillable = [
         'path_image', 'name_event', 'date'
     ];
+
+    public function user()
+{
+    return $this->belongsTo(User::class, 'id_user');
+}
 }

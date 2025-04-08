@@ -24,8 +24,8 @@ class UserController extends Controller
             'name' => 'required|string|max:45',
             'username' => 'required|string|max:30|unique:users,username',
             'password' => 'required|string|min:8',
-            'level' => 'required|in:owner,staff',
-            'status' => 'required|in:active,deactive',
+            'level' => 'required|in:Owner,Staff',
+            'status' => 'required|in:Active,Deactive',
         ]);
 
         $validatedData['password'] = bcrypt($validatedData['password']);

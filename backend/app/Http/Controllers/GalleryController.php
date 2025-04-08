@@ -7,7 +7,6 @@ use App\Models\Gallery;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 
-
 class GalleryController extends Controller
 {
     public function index()
@@ -23,45 +22,48 @@ class GalleryController extends Controller
             'name_event' => 'required|string|max:255',
             'date' => 'required|date',
         ]);
-    
+
         $path = $request->file('image')->store('gallery', 'public');
-    
+
         Gallery::create([
             'path_image' => $path,
             'name_event' => $request->name_event,
             'date' => $request->date,
             'id_user' => Auth::id()
         ]);
-    
-        return redirect()->route('gallery.index')->with('success', 'Gallery berhasil ditambahkan.');
+
+        return redirect()->back()->with('success', 'Gallery berhasil ditambahkan.');
     }
- 
-    public function update(Request $request, Gallery $gallery)
+
+    public function update(Request $request, $id)
     {
+        $gallery = Gallery::findOrFail($id);
+    
         $request->validate([
-            'name_event' => 'required|string|max:255',
+            'name_event' => 'required',
             'date' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'nullable|image|max:2048',
         ]);
     
-        $data = [
-            'name_event' => $request->name_event,
-            'date' => $request->date,
-        ];
+        $gallery->name_event = $request->name_event;
+        $gallery->date = $request->date;
     
         if ($request->hasFile('image')) {
-            if ($gallery->path_image) {
+            // Hapus gambar lama jika ada
+            if ($gallery->path_image && Storage::disk('public')->exists($gallery->path_image)) {
                 Storage::disk('public')->delete($gallery->path_image);
             }
     
+            // Simpan gambar baru
             $path = $request->file('image')->store('gallery', 'public');
-            $data['path_image'] = $path;
+            $gallery->path_image = $path;
         }
     
-        $gallery->update($data);
+        $gallery->save();
     
-        return redirect()->route('gallery.index')->with('success', 'Gallery berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Gallery berhasil diperbarui.');
     }
+    
     
 
     public function destroy($id)
@@ -74,8 +76,6 @@ class GalleryController extends Controller
 
         $gallery->delete();
 
-        return redirect()->route('gallery.index')->with('success', 'Gallery berhasil dihapus.');
+        return redirect()->back()->with('success', 'Gallery berhasil dihapus.');
     }
-    
-    
 }

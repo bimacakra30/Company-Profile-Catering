@@ -11,11 +11,11 @@
   <link rel="stylesheet" href="{{ url('template/dist/css/adminlte.min.css?v=3.2.0')}}">
 
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page" style="background-color: bisque;">
 <div class="login-box">
-  <div class="card card-outline card-primary">
+  <div class="card card-outline card-success">
     <div class="card-header text-center">
-      <a href="{{ url('/') }}" class="h1"><b>Dandang</b>gulo</a>
+      <a href="{{ url('/') }}" class="h1"><b>Dandanggulo</b></a>
     </div>
     <div class="card-body">
       <p class="login-box-msg">Sign in to start your session</p>
@@ -58,7 +58,7 @@
             </div>
           </div>
           <div class="col-12">
-            <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+            <button type="submit" class="btn btn-success btn-block">Sign In</button>
           </div>
         </div>
       </form>

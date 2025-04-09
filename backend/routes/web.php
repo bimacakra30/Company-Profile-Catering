@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -35,5 +36,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/{id_gallery}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
         Route::put('/{id_gallery}', [GalleryController::class, 'update'])->name('gallery.update');
         Route::delete('/{id_gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
+    });
+
+    Route::prefix('portfolio')->group(function () {
+        Route::get('/', [PortfolioController::class, 'index'])->name('portfolio.index');
+        Route::get('/create', [PortfolioController::class, 'create'])->name('portfolio.create');
+        Route::post('/', [PortfolioController::class, 'store'])->name('portfolio.store');
+        Route::get('/{id_portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit');
+        Route::put('/{id_portfolio}', [PortfolioController::class, 'update'])->name('portfolio.update');
+        Route::delete('/{id_portfolio}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
     });
 });

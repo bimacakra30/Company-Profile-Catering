@@ -18,7 +18,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
             'name_event' => 'required|string|max:255',
             'date' => 'required|date',
         ]);
@@ -32,7 +32,7 @@ class GalleryController extends Controller
             'id_user' => Auth::id()
         ]);
 
-        return redirect()->back()->with('success', 'Gallery berhasil ditambahkan.');
+        return redirect()->back()->with('success', 'Gallery successfully added.');
     }
 
     public function update(Request $request, $id)
@@ -42,26 +42,24 @@ class GalleryController extends Controller
         $request->validate([
             'name_event' => 'required',
             'date' => 'required|date',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:5120',
         ]);
     
         $gallery->name_event = $request->name_event;
         $gallery->date = $request->date;
     
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
             if ($gallery->path_image && Storage::disk('public')->exists($gallery->path_image)) {
                 Storage::disk('public')->delete($gallery->path_image);
             }
     
-            // Simpan gambar baru
             $path = $request->file('image')->store('gallery', 'public');
             $gallery->path_image = $path;
         }
     
         $gallery->save();
     
-        return redirect()->back()->with('success', 'Gallery berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Gallery successfully updated.');
     }
     
     
@@ -76,6 +74,6 @@ class GalleryController extends Controller
 
         $gallery->delete();
 
-        return redirect()->back()->with('success', 'Gallery berhasil dihapus.');
+        return redirect()->back()->with('success', 'Gallery successfully deleted.');
     }
 }

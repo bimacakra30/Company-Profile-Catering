@@ -18,17 +18,6 @@ Route::middleware('auth')->group(function () {
         return view('index');
     })->name('dashboard');
 
-    Route::prefix('user')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('users.index');
-        Route::get('/create', [UserController::class, 'create'])->name('users.create');
-        Route::post('/', [UserController::class, 'store'])->name('users.store');
-        Route::get('/{id}', [UserController::class, 'show'])->name('users.show');
-        Route::get('/{id_user}/edit', [UserController::class, 'edit'])->name('users.edit');
-        Route::put('/{id_user}', [UserController::class, 'update'])->name('users.update');
-        Route::put('/{id_user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
-
-    });
-
     Route::prefix('gallery')->group(function () {
         Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
         Route::get('/create', [GalleryController::class, 'create'])->name('gallery.create');
@@ -47,3 +36,23 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{id_portfolio}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
     });
 });
+
+Route::prefix('user')->group(function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::group(['middleware' => function ($request, $next) {
+            if (auth()->user()->level !== 'Owner') {
+                abort(403, 'Unauthorized');
+            }
+            return $next($request);
+        }], function () {
+            Route::get('/', [UserController::class, 'index'])->name('users.index');
+            Route::get('/create', [UserController::class, 'create'])->name('users.create');
+            Route::post('/', [UserController::class, 'store'])->name('users.store');
+            Route::get('/{id}', [UserController::class, 'show'])->name('users.show');
+            Route::get('/{id_user}/edit', [UserController::class, 'edit'])->name('users.edit');
+            Route::put('/{id_user}', [UserController::class, 'update'])->name('users.update');
+            Route::put('/{id_user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+        });
+    });
+});
+

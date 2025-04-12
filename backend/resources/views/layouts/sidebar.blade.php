@@ -27,12 +27,15 @@
                         <p> Dashboard </p>
                     </a>
                 </li>
+                @if(Auth::user()->level === 'Owner')
                 <li class="nav-item">
                     <a href="{{ route('users.index') }}" class="nav-link {{ request()->routeIs('users.index') ? 'bg-success' : '' }}">
                         <i class="nav-icon fas fa-user"></i>
                         <p> User Management </p>
                     </a>
                 </li>
+                @endif
+
                 <li class="nav-item">
                     <a href="{{ route('gallery.index') }}" class="nav-link {{ request()->routeIs('gallery.index') ? 'bg-success' : '' }}">
                         <i class="nav-icon fas fa-images"></i>

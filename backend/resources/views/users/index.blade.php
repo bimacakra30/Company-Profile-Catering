@@ -32,7 +32,7 @@
                     <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">Add User</a>
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>No</th>
                                 <th>Name</th>
                                 <th>Username</th>

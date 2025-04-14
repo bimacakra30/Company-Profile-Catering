@@ -31,7 +31,7 @@
 
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
+                        <tr class="text-center">
                                 <th>No</th>
                                 <th>Image</th>
                                 <th>Event Name</th>

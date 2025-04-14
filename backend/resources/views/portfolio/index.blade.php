@@ -28,7 +28,9 @@
 
             <div class="content">
                 <div class="container-fluid">
-                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">Add portfolio</button>
+                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <i class="fa fa-plus"></i>
+                    </button>
 
                     <table class="table table-bordered">
                         <thead>
@@ -62,10 +64,10 @@
                                         data-date="{{ $item->date_activity }}"
                                         data-description="{{ $item->description }}"
                                         data-image="{{ asset(path: 'storage/' . $item->path_image) }}">
-                                        Edit
+                                        <i class="fa fa-pencil-alt"></i>
                                     </button>
                                     <button class="btn btn-danger btn-delete" data-id="{{ $item->id_portfolio }}">
-                                        Delete
+                                    <i class="fa fa-trash"></i>
                                     </button>
                                 </td>
                             </tr>

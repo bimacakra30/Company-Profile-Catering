@@ -29,7 +29,9 @@
 
             <div class="content">
                 <div class="container-fluid">
-                    <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">Add User</a>
+                    <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">
+                    <i class="fa fa-plus"></i>
+                </a>
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center">
@@ -56,13 +58,15 @@
                                         data-username="{{ $user->username }}"
                                         data-level="{{ $user->level }}"
                                         data-status="{{ $user->status }}">
-                                        Edit
+                                        <i class="fa fa-pencil-alt"></i>
                                     </button>
                                     @if ($user->status == 'Active')
                                     <form action="{{ route('users.deactivate', $user->id_user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('PUT')
-                                        <button type="submit" class="btn btn-danger">Deactivate</button>
+                                        <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-ban"></i>
+                                        </button>
                                     </form>
                                     @endif
 

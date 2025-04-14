@@ -6,6 +6,24 @@
     <title>Dashboard</title>
     <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css?v=3.2.0') }}">
+    <style>
+        .welcome-message {
+            background-color: transparent; /* latar full putih */
+            margin-bottom: 20px;
+        }
+
+        .welcome-message h2 {
+            font-size: 1.75rem;
+            color: #1b1b1b;
+            margin-bottom: 8px;
+        }
+
+        .welcome-message p {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 4px; /* jarak antar paragraf agar tidak terlalu jauh */
+        }
+    </style>
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -14,23 +32,15 @@
     @include('layouts.sidebar')
 
     <div class="content-wrapper">
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">Dashboard</h1>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <div class="content">
             <div class="container-fluid">
-                <div class="card">
-                    <div class="card-body">
-                        <h5>Selamat datang, {{ Auth::user()->name ?? 'User' }}!</h5>
-                        <p>Anda berhasil login.</p>
-                    </div>
+                <div class="welcome-message py-4 px-3">
+                    <h2 class="font-weight-bold">
+                        Selamat datang, {{ Auth::user()->name ?? 'User' }}!
+                        <i class="fas fa-smile-beam mr-2"></i>
+                    </h2>
+                    <p>Selamat bekerja</p>
+                    <p>Semoga harimu menyenangkan 😊</p>
                 </div>
             </div>
         </div>

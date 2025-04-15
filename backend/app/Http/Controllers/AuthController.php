@@ -22,12 +22,21 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+        // Cek sekaligus username, password, dan status
+        $credentials = [
+            'username' => $request->username,
+            'password' => $request->password,
+            'status' => 'Active'
+        ];
+
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
         }
 
-        return back()->withErrors(['login' => 'Username atau password salah, atau akun pengguna sudah tidak aktif.']);
+        return back()->withErrors([
+            'login' => 'Username atau password salah, atau akun pengguna sudah tidak aktif.'
+        ]);
     }
 
     public function logout(Request $request)

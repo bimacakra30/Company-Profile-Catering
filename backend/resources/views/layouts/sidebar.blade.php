@@ -60,7 +60,12 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('category.index') }}" class="nav-link {{ request()->routeIs('category.index') ? 'submenu-active' : '' }}">
-                                <p>Paket Prasmanan</p>
+                                <p>Category</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('product.index') }}" class="nav-link {{ request()->routeIs('product.index') ? 'submenu-active' : '' }}">
+                                <p>Product</p>
                             </a>
                         </li>
                     </ul>

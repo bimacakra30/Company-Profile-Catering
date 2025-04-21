@@ -38,15 +38,14 @@ Route::middleware('auth')->group(function () {
         Route::put('/{id_category}', [\App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
         Route::delete('/{id_category}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('category.destroy');
     });
-    
 
-    // Route::prefix('paket')->group(function () {
-    //     Route::get('/prasmanan', [PaketController::class, 'prasmanan'])->name('paket.prasmanan');
-    //     Route::get('/nasi-box', [PaketController::class, 'nasiBox'])->name('paket.nasi-box');
-    //     Route::get('/snack', [PaketController::class, 'snack'])->name('paket.snack');
-    //     Route::get('/hampers', [PaketController::class, 'hampers'])->name('paket.hampers');
-    //     Route::get('/produk-lain', [PaketController::class, 'produkLain'])->name('paket.produk-lain');
-    // });
+    Route::prefix('product')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
+        Route::post('/', [\App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
+        Route::put('/{id_product}', [\App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
+        Route::delete('/{id_product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+    });
+
 });
 
 Route::prefix('user')->group(function () {

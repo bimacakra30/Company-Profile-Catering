@@ -22,4 +22,8 @@ class Category extends Model
     {
         return $this->belongsTo(User::class, 'id_user');
     }
+    public function products()
+{
+    return $this->hasMany(Product::class, 'id_category');
+}
 }

@@ -59,28 +59,8 @@
                 </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('paket.prasmanan') }}" class="nav-link {{ request()->routeIs('paket.prasmanan') ? 'submenu-active' : '' }}">
+                            <a href="{{ route('category.index') }}" class="nav-link {{ request()->routeIs('category.index') ? 'submenu-active' : '' }}">
                                 <p>Paket Prasmanan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('paket.nasi-box') }}" class="nav-link {{ request()->routeIs('paket.nasi-box') ? 'submenu-active' : '' }}">
-                                <p>Paket Nasi Box</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('paket.snack') }}" class="nav-link {{ request()->routeIs('paket.snack') ? 'submenu-active' : '' }}">
-                                <p>Paket Snack</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('paket.hampers') }}" class="nav-link {{ request()->routeIs('paket.hampers') ? 'submenu-active' : '' }}">
-                                <p>Paket Hampers</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('produk.lain') }}" class="nav-link {{ request()->routeIs('produk.lain') ? 'submenu-active' : '' }}">
-                                <p>Produk Lain</p>
                             </a>
                         </li>
                     </ul>

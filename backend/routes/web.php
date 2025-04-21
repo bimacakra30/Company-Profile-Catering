@@ -20,29 +20,33 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('gallery')->group(function () {
         Route::get('/', [GalleryController::class, 'index'])->name('gallery.index');
-        Route::get('/create', [GalleryController::class, 'create'])->name('gallery.create');
         Route::post('/', [GalleryController::class, 'store'])->name('gallery.store');
-        Route::get('/{id_gallery}/edit', [GalleryController::class, 'edit'])->name('gallery.edit');
         Route::put('/{id_gallery}', [GalleryController::class, 'update'])->name('gallery.update');
         Route::delete('/{id_gallery}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
     });
 
     Route::prefix('portfolio')->group(function () {
         Route::get('/', [PortfolioController::class, 'index'])->name('portfolio.index');
-        Route::get('/create', [PortfolioController::class, 'create'])->name('portfolio.create');
         Route::post('/', [PortfolioController::class, 'store'])->name('portfolio.store');
-        Route::get('/{id_portfolio}/edit', [PortfolioController::class, 'edit'])->name('portfolio.edit');
         Route::put('/{id_portfolio}', [PortfolioController::class, 'update'])->name('portfolio.update');
         Route::delete('/{id_portfolio}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
     });
 
-    Route::prefix('paket')->group(function () {
-        Route::get('/prasmanan', [PaketController::class, 'prasmanan'])->name('paket.prasmanan');
-        Route::get('/nasi-box', [PaketController::class, 'nasiBox'])->name('paket.nasi-box');
-        Route::get('/snack', [PaketController::class, 'snack'])->name('paket.snack');
-        Route::get('/hampers', [PaketController::class, 'hampers'])->name('paket.hampers');
-        Route::get('/produk-lain', [PaketController::class, 'produkLain'])->name('paket.produk-lain');
-    });    
+    Route::prefix('category')->group(function () {
+        Route::get('/', [\App\Http\Controllers\CategoryController::class, 'index'])->name('category.index');
+        Route::post('/', [\App\Http\Controllers\CategoryController::class, 'store'])->name('category.store');
+        Route::put('/{id_category}', [\App\Http\Controllers\CategoryController::class, 'update'])->name('category.update');
+        Route::delete('/{id_category}', [\App\Http\Controllers\CategoryController::class, 'destroy'])->name('category.destroy');
+    });
+    
+
+    // Route::prefix('paket')->group(function () {
+    //     Route::get('/prasmanan', [PaketController::class, 'prasmanan'])->name('paket.prasmanan');
+    //     Route::get('/nasi-box', [PaketController::class, 'nasiBox'])->name('paket.nasi-box');
+    //     Route::get('/snack', [PaketController::class, 'snack'])->name('paket.snack');
+    //     Route::get('/hampers', [PaketController::class, 'hampers'])->name('paket.hampers');
+    //     Route::get('/produk-lain', [PaketController::class, 'produkLain'])->name('paket.produk-lain');
+    // });
 });
 
 Route::prefix('user')->group(function () {

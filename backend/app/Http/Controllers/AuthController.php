@@ -22,7 +22,6 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
-        // Cek sekaligus username, password, dan status
         $credentials = [
             'username' => $request->username,
             'password' => $request->password,

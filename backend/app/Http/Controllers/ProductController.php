@@ -14,11 +14,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('user', 'category')->get(); // Pastikan relasi 'user' dan 'category' sudah ada di model Product
-        $categories = Category::all(); // Ambil semua kategori dari tabel categories
+        $products = Product::with('user', 'category')->get();
+        $categories = Category::all();
     
         return view('product.index', compact('products', 'categories'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
@@ -26,16 +27,16 @@ class ProductController extends Controller
             'name_product' => 'required|string|max:255',
             'description' => 'required|string|max:300',
             'price_product' => 'required|numeric',
-            'id_category' => 'required|exists:categories,id_category',
+            'id_category' => 'required|exists:category,id_category',
         ]);
     
         $eventName = Str::slug(Str::limit($request->name_product, 15));
-        $date = \Carbon\Carbon::now()->format('dmY');
+        $date = Carbon::now()->format('dmY');
         $ext = $request->file('image')->getClientOriginalExtension();
         $filename = "{$eventName}_{$date}." . $ext;
-    
+
         $path = $request->file('image')->storeAs('products', $filename, 'public');
-    
+
         Product::create([
             'path_image' => $path,
             'name_product' => $request->name_product,
@@ -46,7 +47,7 @@ class ProductController extends Controller
         ]);
     
         return redirect()->back()->with('success', 'Product successfully added.');
-    }    
+    }
 
     public function update(Request $request, $id)
     {
@@ -56,7 +57,7 @@ class ProductController extends Controller
             'name_product' => 'required|string|max:255',
             'description' => 'required|string|max:300',
             'price_product' => 'required|numeric',
-            'id_category' => 'required|exists:categories,id_category',
+            'id_category' => 'required|exists:category,id_category',
             'image' => 'nullable|image|max:5120',
         ]);
 

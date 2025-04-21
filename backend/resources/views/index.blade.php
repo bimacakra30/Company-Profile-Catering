@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css?v=3.2.0') }}">
     <style>
         .welcome-message {
-            background-color: transparent; /* latar full putih */
+            background-color: transparent;
             margin-bottom: 20px;
         }
 
@@ -21,7 +21,7 @@
         .welcome-message p {
             font-size: 1.1rem;
             color: #333;
-            margin-bottom: 4px; /* jarak antar paragraf agar tidak terlalu jauh */
+            margin-bottom: 4px;
         }
     </style>
 </head>

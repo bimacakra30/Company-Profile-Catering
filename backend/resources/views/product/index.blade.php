@@ -57,7 +57,7 @@
                                 <td>{{ $item->name_product }}</td>
                                 <td>{{ number_format($item->price_product, 2) }}</td>
                                 <td>{{ $item->description }}</td>
-                                <td>{{ $item->category->name ?? 'Tidak Diketahui' }}</td>
+                                <td>{{ $item->category->name_category ?? 'Tidak Diketahui' }}</td>
                                 <td>{{ $item->user->name ?? 'Tidak Diketahui' }}</td>
                                 <td>
                                     <button class="btn btn-warning btn-edit"
@@ -107,7 +107,7 @@
                                 <label>Category</label>
                                 <select name="id_category" class="form-control" required>
                                     @foreach($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name_category }}</option>
+                                    <option value="{{ $category->id_category }}">{{ $category->name_category }}</option>
                                     @endforeach
                                 </select>
                             </div>

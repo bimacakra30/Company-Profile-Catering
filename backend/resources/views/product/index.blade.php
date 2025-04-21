@@ -28,56 +28,71 @@
 
             <div class="content">
                 <div class="container-fluid">
-                    <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
-                        <i class="fa fa-plus"></i>
+                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <i class="fa fa-plus"></i>
                     </button>
+                    @foreach($categories as $category)
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">{{ $category->name_category }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="text-center">
+                                        <th>No</th>
+                                        <th>Image</th>
+                                        <th>Product Name</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th>Added By</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                    $filtered = $products->where('id_category', $category->id_category);
+                                    @endphp
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th>No</th>
-                                <th>Image</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Description</th>
-                                <th>Category</th>
-                                <th>Added By</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($products as $item)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>
-                                    <img src="{{ asset('storage/' . $item->path_image) }}" width="100" class="img-thumbnail previewable"
-                                        alt="{{ $item->name_product }}" data-src="{{ asset('storage/' . $item->path_image) }}"
-                                        style="cursor: pointer;">
-                                </td>
-                                <td>{{ $item->name_product }}</td>
-                                <td>{{ number_format($item->price_product, 2) }}</td>
-                                <td>{{ $item->description }}</td>
-                                <td>{{ $item->category->name_category ?? 'Tidak Diketahui' }}</td>
-                                <td>{{ $item->user->name ?? 'Tidak Diketahui' }}</td>
-                                <td>
-                                    <button class="btn btn-warning btn-edit"
-                                        data-id="{{ $item->id_product }}"
-                                        data-name="{{ $item->name_product }}"
-                                        data-price="{{ $item->price_product }}"
-                                        data-description="{{ $item->description }}"
-                                        data-category="{{ $item->id_category }}"
-                                        data-image="{{ asset('storage/' . $item->path_image) }}">
-                                        <i class="fa fa-pencil-alt"></i>
-                                    </button>
-                                    <button class="btn btn-danger btn-delete" data-id="{{ $item->id_product }}">
-                                        <i class="fa fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                                    @forelse($filtered as $item)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td>
+                                            <img src="{{ asset('storage/' . $item->path_image) }}" width="100" class="img-thumbnail previewable"
+                                                alt="{{ $item->name_product }}" data-src="{{ asset('storage/' . $item->path_image) }}"
+                                                style="cursor: pointer;">
+                                        </td>
+                                        <td>{{ $item->name_product }}</td>
+                                        <td>{{ number_format($item->price_product, 2) }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->user->name ?? 'Tidak Diketahui' }}</td>
+                                        <td>
+                                            <button class="btn btn-warning btn-edit"
+                                                data-id="{{ $item->id_product }}"
+                                                data-name="{{ $item->name_product }}"
+                                                data-price="{{ $item->price_product }}"
+                                                data-description="{{ $item->description }}"
+                                                data-category="{{ $item->id_category }}"
+                                                data-image="{{ asset('storage/' . $item->path_image) }}">
+                                                <i class="fa fa-pencil-alt"></i>
+                                            </button>
+                                            <button class="btn btn-danger btn-delete" data-id="{{ $item->id_product }}">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    @empty
+                                    <tr>
+                                        <td colspan="7" class="text-center">Tidak ada produk di kategori ini.</td>
+                                    </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
+
             </div>
         </div>
 

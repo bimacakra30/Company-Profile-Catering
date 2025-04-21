@@ -28,12 +28,12 @@
             <div class="content">
                 <div class="container-fluid">
                     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
-                    <i class="fa fa-plus"></i>
+                        <i class="fa fa-plus"></i>
                     </button>
 
                     <table class="table table-bordered">
                         <thead>
-                        <tr class="text-center">
+                            <tr class="text-center">
                                 <th>No</th>
                                 <th>Category Name</th>
                                 <th>Added By</th>
@@ -43,14 +43,14 @@
                         <tbody>
                             @foreach($categories as $category)
                             <tr>
-                                <td>{{ $category->id_category }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $category->name_category }}</td>
                                 <td>{{ $category->user->name ?? 'Tidak Diketahui' }}</td>
                                 <td>
                                     <button class="btn btn-warning btn-edit"
                                         data-id="{{ $category->id_category }}"
                                         data-name="{{ $category->name_category }}">
-                                        <i class="fa fa-pencil-alt"></i>                                    
+                                        <i class="fa fa-pencil-alt"></i>
                                     </button>
                                     <button class="btn btn-danger btn-delete"
                                         data-id="{{ $category->id_category }}">

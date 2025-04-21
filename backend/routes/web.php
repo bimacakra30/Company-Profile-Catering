@@ -35,6 +35,14 @@ Route::middleware('auth')->group(function () {
         Route::put('/{id_portfolio}', [PortfolioController::class, 'update'])->name('portfolio.update');
         Route::delete('/{id_portfolio}', [PortfolioController::class, 'destroy'])->name('portfolio.destroy');
     });
+
+    Route::prefix('paket')->group(function () {
+        Route::get('/prasmanan', [PaketController::class, 'prasmanan'])->name('paket.prasmanan');
+        Route::get('/nasi-box', [PaketController::class, 'nasiBox'])->name('paket.nasi-box');
+        Route::get('/snack', [PaketController::class, 'snack'])->name('paket.snack');
+        Route::get('/hampers', [PaketController::class, 'hampers'])->name('paket.hampers');
+        Route::get('/produk-lain', [PaketController::class, 'produkLain'])->name('paket.produk-lain');
+    });    
 });
 
 Route::prefix('user')->group(function () {

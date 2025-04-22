@@ -40,11 +40,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('product')->group(function () {
+        Route::get('/product/category/{id}', [\App\Http\Controllers\ProductController::class, 'byCategory'])->name('product.category');
         Route::get('/', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
         Route::post('/', [\App\Http\Controllers\ProductController::class, 'store'])->name('product.store');
         Route::put('/{id_product}', [\App\Http\Controllers\ProductController::class, 'update'])->name('product.update');
         Route::delete('/{id_product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
     });
+
+    
 
 });
 

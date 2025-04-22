@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = Product::with('user', 'category')->get();
         $categories = Category::all();
-    
+
         return view('product.index', compact('products', 'categories'));
     }
 
@@ -29,7 +29,7 @@ class ProductController extends Controller
             'price_product' => 'required|numeric',
             'id_category' => 'required|exists:category,id_category',
         ]);
-    
+
         $eventName = Str::slug(Str::limit($request->name_product, 15));
         $date = Carbon::now()->format('dmY');
         $ext = $request->file('image')->getClientOriginalExtension();
@@ -45,7 +45,7 @@ class ProductController extends Controller
             'id_category' => $request->id_category,
             'id_user' => Auth::id(),
         ]);
-    
+
         return redirect()->back()->with('success', 'Product successfully added.');
     }
 
@@ -91,5 +91,14 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->back()->with('success', 'Product successfully deleted.');
+    }
+
+    public function byCategory($id)
+    {
+        $category = Category::findOrFail($id);
+        $categories = Category::all();
+        $products = Product::with('user')->where('id_category', $id)->get();
+
+        return view('product.category-view', compact('category', 'categories', 'products'));
     }
 }

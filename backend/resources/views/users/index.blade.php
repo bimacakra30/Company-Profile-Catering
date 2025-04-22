@@ -30,8 +30,8 @@
             <div class="content">
                 <div class="container-fluid">
                     <a href="#" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addUserModal">
-                    <i class="fa fa-plus"></i>
-                </a>
+                        <i class="fa fa-plus"></i> Add User
+                    </a>
                     <table class="table table-bordered">
                         <thead>
                             <tr class="text-center">
@@ -58,18 +58,18 @@
                                         data-username="{{ $user->username }}"
                                         data-level="{{ $user->level }}"
                                         data-status="{{ $user->status }}">
-                                        <i class="fa fa-pencil-alt"></i>
+                                        <i class="fa fa-pencil-alt"></i> Edit
                                     </button>
+
                                     @if ($user->status == 'Active')
                                     <form action="{{ route('users.deactivate', $user->id_user) }}" method="POST" style="display:inline;">
                                         @csrf
                                         @method('PUT')
                                         <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-ban"></i>
+                                            <i class="fa fa-ban"></i> Deactivate
                                         </button>
                                     </form>
                                     @endif
-
                                 </td>
                             </tr>
                             @endforeach
@@ -79,11 +79,12 @@
             </div>
         </div>
 
+        <!-- Edit User Modal -->
         <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="editUserModalLabel">Edit Pengguna</h5>
+                        <h5 class="modal-title" id="editUserModalLabel">Edit User</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -94,7 +95,7 @@
                         <div class="modal-body">
                             <input type="hidden" id="edit_user_id" name="id_user">
                             <div class="form-group">
-                                <label for="edit_name">Nama</label>
+                                <label for="edit_name">Name</label>
                                 <input type="text" class="form-control" id="edit_name" name="name" required>
                             </div>
                             <div class="form-group">
@@ -102,7 +103,7 @@
                                 <input type="text" class="form-control" id="edit_username" name="username" required>
                             </div>
                             <div class="form-group">
-                                <label for="edit_password">Password (Kosongkan jika tidak ingin mengubah)</label>
+                                <label for="edit_password">Password (Leave empty if not changing)</label>
                                 <input type="password" class="form-control" id="edit_password" name="password">
                             </div>
                             <div class="form-group">
@@ -122,7 +123,56 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-info">Save Change</button>
+                            <button type="submit" class="btn btn-info">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add User Modal -->
+        <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addUserModalLabel">Add User</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form id="addUserForm" action="{{ route('users.store') }}" method="POST">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="add_name">Name</label>
+                                <input type="text" class="form-control" id="add_name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="add_username">Username</label>
+                                <input type="text" class="form-control" id="add_username" name="username" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="add_password">Password</label>
+                                <input type="password" class="form-control" id="add_password" name="password" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="add_level">Level</label>
+                                <select class="form-control" id="add_level" name="level" required>
+                                    <option value="Owner">Owner</option>
+                                    <option value="Staff">Staff</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="add_status">Status</label>
+                                <select class="form-control" id="add_status" name="status" required>
+                                    <option value="Active">Active</option>
+                                    <option value="Deactive">Deactive</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-success">Add</button>
                         </div>
                     </form>
                 </div>
@@ -137,7 +187,6 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-        $(document).ready(function() {
             $(".btn-edit").click(function() {
                 let userId = $(this).data("id");
                 let name = $(this).data("name");
@@ -156,94 +205,19 @@
 
                 $("#editUserModal").modal("show");
             });
-
-            $("#editUserForm").submit(function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: "Apakah Anda yakin?",
-                    text: "Data akan diperbarui!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, perbarui!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.submit();
-                    }
-                });
-            });
-        });
     </script>
 
-    <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addUserModalLabel">Tambah Pengguna</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form id="addUserForm" action="{{ route('users.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="add_name">Nama</label>
-                            <input type="text" class="form-control" id="add_name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="add_username">Username</label>
-                            <input type="text" class="form-control" id="add_username" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="add_password">Password</label>
-                            <input type="password" class="form-control" id="add_password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="add_level">Level</label>
-                            <select class="form-control" id="add_level" name="level" required>
-                                <option value="Owner">Owner</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="add_status">Status</label>
-                            <select class="form-control" id="add_status" name="status" required>
-                                <option value="Active">Active</option>
-                                <option value="Deactive">Deactive</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-success">Add</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
+        @if(session('success'))
     <script>
-        $(document).ready(function() {
-            $("#addUserForm").submit(function(e) {
-                e.preventDefault();
-                Swal.fire({
-                    title: "Apakah Anda yakin?",
-                    text: "Pengguna baru akan ditambahkan!",
-                    icon: "warning",
-                    showCancelButton: true,
-                    confirmButtonColor: "#3085d6",
-                    cancelButtonColor: "#d33",
-                    confirmButtonText: "Ya, tambahkan!"
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.submit();
-                    }
-                });
-            });
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "{{ session('success') }}",
+            showConfirmButton: false,
+            timer: 2000
         });
     </script>
+    @endif
 
 </body>
 

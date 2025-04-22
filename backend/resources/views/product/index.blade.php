@@ -4,14 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product</title>
+    <title>Category - {{ $category->name_category }}</title>
     <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css?v=3.2.0') }}">
 </head>
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-
         @include('layouts.navbar')
         @include('layouts.sidebar')
 
@@ -20,7 +19,11 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Product</h1>
+                            <h1 class="m-0">Category: {{ $category->name_category }}</h1>
+                            <!-- Tombol untuk membuka modal create -->
+                            <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
+                                <i class="fa fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -28,18 +31,15 @@
 
             <div class="content">
                 <div class="container-fluid">
-                <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#createModal">
-                    <i class="fa fa-plus"></i>
-                    </button>
-                    @foreach($categories as $category)
-                    <div class="card mb-4">
+                    <div class="card">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">{{ $category->name_category }}</h5>
+                            <h5 class="mb-0">Product In Category {{ $category->name_category }}</h5>
                         </div>
                         <div class="card-body">
+                            @if($products->count())
                             <table class="table table-bordered">
-                                <thead>
-                                    <tr class="text-center">
+                                <thead class="text-center">
+                                    <tr>
                                         <th>No</th>
                                         <th>Image</th>
                                         <th>Product Name</th>
@@ -50,17 +50,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                    $filtered = $products->where('id_category', $category->id_category);
-                                    @endphp
-
-                                    @forelse($filtered as $item)
+                                    @foreach($products as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            <img src="{{ asset('storage/' . $item->path_image) }}" width="100" class="img-thumbnail previewable"
-                                                alt="{{ $item->name_product }}" data-src="{{ asset('storage/' . $item->path_image) }}"
-                                                style="cursor: pointer;">
+                                        <td class="text-center">
+                                            <img src="{{ asset('storage/' . $item->path_image) }}" width="100" class="img-thumbnail" alt="{{ $item->name_product }}">
                                         </td>
                                         <td>{{ $item->name_product }}</td>
                                         <td>{{ number_format($item->price_product, 2) }}</td>
@@ -81,18 +75,17 @@
                                             </button>
                                         </td>
                                     </tr>
-                                    @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">Tidak ada produk di kategori ini.</td>
-                                    </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
+                            @else
+                            <div class="alert alert-warning text-center mb-0">
+                                There are no products in this category.
+                            </div>
+                            @endif
                         </div>
                     </div>
-                    @endforeach
                 </div>
-
             </div>
         </div>
 
@@ -213,19 +206,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id="imagePreviewModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content bg-dark">
-                    <div class="modal-header border-0">
-                        <button type="button" class="btn-close btn-close-white ms-auto" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body text-center">
-                        <img id="previewImage" src="" alt="Preview" class="img-fluid rounded">
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
@@ -257,12 +237,6 @@
             const action = '{{ route("product.destroy", ":id") }}'.replace(':id', id);
             $('#deleteForm').attr('action', action);
             new bootstrap.Modal(document.getElementById('deleteModal')).show();
-        });
-
-        $('.previewable').click(function() {
-            const src = $(this).data('src');
-            $('#previewImage').attr('src', src);
-            new bootstrap.Modal(document.getElementById('imagePreviewModal')).show();
         });
     </script>
 

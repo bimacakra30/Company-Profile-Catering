@@ -99,6 +99,6 @@ class ProductController extends Controller
         $categories = Category::all();
         $products = Product::with('user')->where('id_category', $id)->get();
 
-        return view('product.category-view', compact('category', 'categories', 'products'));
+        return view('product.index', compact('category', 'categories', 'products'));
     }
 }

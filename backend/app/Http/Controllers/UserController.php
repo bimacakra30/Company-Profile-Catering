@@ -32,7 +32,7 @@ class UserController extends Controller
 
         User::create($validatedData);
 
-        return redirect()->route('users.index')->with('success', 'Pengguna berhasil ditambahkan.');
+        return redirect()->route('users.index')->with('success', 'User successfully added.');
     }
 
     public function edit($id_user)
@@ -40,7 +40,7 @@ class UserController extends Controller
         $user = User::find($id_user);
 
         if (!$user) {
-            return redirect()->route('users.index')->with('error', 'Pengguna tidak ditemukan.');
+            return redirect()->route('users.index')->with('error', 'User not found.');
         }
 
         return view('users.edit', compact('user'));
@@ -58,7 +58,7 @@ class UserController extends Controller
         $user = User::where('id_user', $id_user)->first();
     
         if (!$user) {
-            return redirect()->route('users.index')->with('error', 'Pengguna tidak ditemukan.');
+            return redirect()->route('users.index')->with('error', 'User not found.');
         }
     
         if ($request->filled('password')) {
@@ -68,7 +68,7 @@ class UserController extends Controller
         }
         $user->update($validatedData);
     
-        return redirect()->route('users.index')->with('success', 'Pengguna berhasil diperbarui.');
+        return redirect()->route('users.index')->with('success', 'User successfully updated.');
     }
 
     public function deactivate($id_user)
@@ -76,13 +76,13 @@ class UserController extends Controller
     $user = User::where('id_user', $id_user)->first();
 
     if (!$user) {
-        return redirect()->route('users.index')->with('error', 'Pengguna tidak ditemukan.');
+        return redirect()->route('users.index')->with('error', 'User not found.');
     }
     
     $user->status = 'Deactive';
     $user->save();
 
-    return redirect()->route('users.index')->with('success', 'Pengguna berhasil dinonaktifkan.');
+    return redirect()->route('users.index')->with('success', 'User successfully deactivated.');
 }
 
     

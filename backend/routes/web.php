@@ -47,6 +47,11 @@ Route::middleware('auth')->group(function () {
         Route::delete('/{id_product}', [\App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
     });
 
+    Route::prefix('review')->group(function () {
+        Route::get('/', [\App\Http\Controllers\ReviewController::class, 'index'])->name('review.index');
+        Route::put('/{id_review}', [\App\Http\Controllers\ReviewController::class, 'update'])->name('review.update');
+        Route::delete('/{id_review}', [\App\Http\Controllers\ReviewController::class, 'destroy'])->name('review.destroy');
+    });
     
 
 });

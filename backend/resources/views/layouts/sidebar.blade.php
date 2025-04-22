@@ -51,7 +51,7 @@
                     </a>
                 </li>
 
-                <li class="nav-item menu-open">
+                <li class="nav-item">
                     <a href="#" class="nav-link {{ request()->is('paket-*') ? 'menu-active' : '' }}">
                         <i class="nav-icon fas fa-utensils"></i>
                         <i class="right fas fa-angle-left"></i>
@@ -72,6 +72,13 @@
                         </li>
                         @endforeach
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('review.index') }}" class="nav-link {{ request()->routeIs('review.index') ? 'menu-active' : '' }}">
+                        <i class="nav-icon fas fa-comment-dots"></i>
+                        <p> Review </p>
+                    </a>
                 </li>
             </ul>
         </nav>

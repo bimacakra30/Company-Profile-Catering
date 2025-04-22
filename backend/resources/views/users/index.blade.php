@@ -62,13 +62,10 @@
                                     </button>
 
                                     @if ($user->status == 'Active')
-                                    <form action="{{ route('users.deactivate', $user->id_user) }}" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('PUT')
-                                        <button type="submit" class="btn btn-danger">
-                                            <i class="fa fa-ban"></i> Deactivate
-                                        </button>
-                                    </form>
+                                    <button class="btn btn-danger btn-deactivate"
+                                        data-id="{{ $user->id_user }}">
+                                        <i class="fa fa-ban"></i> Deactivate
+                                    </button>
                                     @endif
                                 </td>
                             </tr>
@@ -179,14 +176,35 @@
             </div>
         </div>
 
-    </div>
+        <div class="modal fade" id="deactivateModal" tabindex="-1" aria-labelledby="deactivateModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form method="POST" id="deactivateForm">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deactivateModalLabel">Confirm Deactivation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Are you sure you want to deactivate this user?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger">Deactivate</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-    <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('template/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
+        <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
+        <script src="{{ asset('template/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+        <script src="{{ asset('template/dist/js/adminlte.min.js?v=3.2.0') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
             $(".btn-edit").click(function() {
                 let userId = $(this).data("id");
                 let name = $(this).data("name");
@@ -205,19 +223,30 @@
 
                 $("#editUserModal").modal("show");
             });
-    </script>
+
+            $(".btn-deactivate").click(function() {
+                let userId = $(this).data("id");
+
+                // Update the form action URL with the correct route to deactivate user
+                let deactivateUrl = "{{ route('users.deactivate', ':id') }}".replace(':id', userId);
+                $("#deactivateForm").attr("action", deactivateUrl);
+
+                // Show the deactivate confirmation modal
+                new bootstrap.Modal(document.getElementById('deactivateModal')).show();
+            });
+        </script>
 
         @if(session('success'))
-    <script>
-        Swal.fire({
-            position: "center",
-            icon: "success",
-            title: "{{ session('success') }}",
-            showConfirmButton: false,
-            timer: 2000
-        });
-    </script>
-    @endif
+        <script>
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 2000
+            });
+        </script>
+        @endif
 
 </body>
 

@@ -103,88 +103,80 @@
     </script>
 
 
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
 
-        .main-sidebar {
-            background: linear-gradient(180deg, #1f1c2c, #928dab);
-            color: white;
-        }
+    .main-sidebar {
+        background-color: #ffffff; /* putih bersih */
+        color: #333333;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* sedikit bayangan */
+    }
 
-        .brand-link {
-            background-color: #f4f6f9;
-            color: #4a4a4a;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 1rem;
-        }
+    .brand-link {
+        background-color: #ffffff;
+        color: #718E3F; /* hijau olive seperti login button */
+        font-size: 20px;
+        font-weight: bold;
+        padding: 1.2rem;
+        text-align: center;
+    }
 
-        .user-panel .info a {
-            font-size: 16px;
-            color: white;
-            text-decoration: none;
-        }
+    .user-panel .info a {
+    font-size: 16px;
+    color: #6C4C3B; /* warna coklat gelap */
+    text-decoration: none;
+    font-weight: 600;
+}
 
-        .nav-sidebar .nav-link {
-            font-size: 15px;
-            font-weight: 500;
-            color: white !important; /* semua menu putih */
-            border-radius: 8px;
-            margin: 5px 10px;
-            padding: 10px;
-            transition: 0.3s;
-            opacity: 1 !important;
-        }
-        
-        .nav-sidebar .nav-link:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-            color: white !important; /* tetap putih saat hover */
-        }
 
-        .nav-sidebar .nav-link.disabled {
-            color: white !important; /* kalau ada class disabled */
-            opacity: 1 !important;
-        }
+    .nav-sidebar .nav-link {
+        font-size: 15px;
+        font-weight: 500;
+        color: #333333 !important;
+        border-radius: 8px;
+        margin: 5px 10px;
+        padding: 10px;
+        transition: 0.3s;
+    }
+    
+    .nav-sidebar .nav-link:hover {
+        background-color: #E6F2D9; /* hijau muda saat hover */
+        transform: scale(1.02);
+        color: #333333 !important;
+    }
 
-        .menu-active {
-            background-color: #28a745 !important; /* hijau menu aktif */
-            color: white !important;
-            font-weight: 600;
-        }
+    .menu-active {
+        background-color: #718E3F !important; /* hijau olive */
+        color: white !important;
+        font-weight: 600;
+    }
 
-        .menu-active .nav-icon {
-            color: white !important;
-        }
+    .menu-active .nav-icon {
+        color: white !important;
+    }
 
-        .submenu-disabled {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: white !important;
-            pointer-events: none;
-        }
-        
-        .submenu-active {
-            background-color: #ffc107 !important; /* kuning submenu aktif */
-            color: #343a40 !important;
-            font-weight: 600;
-            border-radius: 8px;
-            margin: 5px 15px;
-            text-align: center;
-        }
-        
-        .submenu-active p {
-            margin: 0;
-        }
-        
-        .nav-icon {
-            color: white;
-            font-size: 18px;
-            margin-right: 5px;
-        }
+    .submenu-active {
+        background-color: #FFC107 !important; /* kuning pastel submenu aktif */
+        color: #343a40 !important;
+        font-weight: 600;
+        border-radius: 8px;
+        margin: 5px 15px;
+        text-align: center;
+    }
+    
+    .submenu-active p {
+        margin: 0;
+    }
 
-    </style>
+    .nav-icon {
+        color: #6C757D; /* abu icon */
+        font-size: 18px;
+        margin-right: 5px;
+    }
+</style>
+
 </aside>

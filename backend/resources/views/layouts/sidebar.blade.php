@@ -132,53 +132,59 @@
         .nav-sidebar .nav-link {
             font-size: 15px;
             font-weight: 500;
-            color: #ffffff;
+            color: white !important; /* semua menu putih */
             border-radius: 8px;
             margin: 5px 10px;
             padding: 10px;
             transition: 0.3s;
+            opacity: 1 !important;
         }
-
+        
         .nav-sidebar .nav-link:hover {
             opacity: 0.9;
             transform: scale(1.02);
+            color: white !important; /* tetap putih saat hover */
+        }
+
+        .nav-sidebar .nav-link.disabled {
+            color: white !important; /* kalau ada class disabled */
+            opacity: 1 !important;
         }
 
         .menu-active {
-            background-color: #28a745 !important;
-            /* hijau */
+            background-color: #28a745 !important; /* hijau menu aktif */
             color: white !important;
             font-weight: 600;
         }
 
         .menu-active .nav-icon {
-            color: white;
+            color: white !important;
         }
 
         .submenu-disabled {
             background-color: rgba(255, 255, 255, 0.05);
-            color: #d0d0d0 !important;
+            color: white !important;
             pointer-events: none;
         }
-
+        
         .submenu-active {
-            background-color: #ffc107 !important;
-            /* kuning */
+            background-color: #ffc107 !important; /* kuning submenu aktif */
             color: #343a40 !important;
             font-weight: 600;
             border-radius: 8px;
             margin: 5px 15px;
             text-align: center;
         }
-
+        
         .submenu-active p {
             margin: 0;
         }
-
+        
         .nav-icon {
             color: white;
             font-size: 18px;
             margin-right: 5px;
         }
+
     </style>
 </aside>

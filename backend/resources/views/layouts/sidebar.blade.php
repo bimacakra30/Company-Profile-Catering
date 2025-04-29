@@ -156,7 +156,7 @@
     .nav-sidebar .nav-link {
         color: #333 !important;
         border-radius: 8px;
-        margin: 4px 8px;
+        margin: 4px 4px;
         padding: 10px 15px;
         transition: all 0.3s ease;
         font-weight: 500;

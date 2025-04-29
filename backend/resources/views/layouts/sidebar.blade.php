@@ -104,78 +104,132 @@
 
 
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-    body {
+    /* Main Sidebar Styling */
+    .main-sidebar {
+        background-color: #f8f9fa;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        border-right: 1px solid #e9ecef;
         font-family: 'Poppins', sans-serif;
     }
 
-    .main-sidebar {
-        background-color: #ffffff; /* putih bersih */
-        color: #333333;
-        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* sedikit bayangan */
+    /* Brand Logo Area */
+    .brand-link {
+        background-color: #718E3F; /* Olive green color */
+        color: white !important;
+        font-weight: 600 !important;
+        padding: 15px;
+        text-align: center;
+        border-bottom: 2px solid #5c7233;
+        transition: all 0.3s ease;
     }
 
-    .brand-link {
-        background-color: #ffffff;
-        color: #718E3F; /* hijau olive seperti login button */
+    .brand-link:hover {
+        background-color: #637c35;
+    }
+
+    .brand-text {
         font-size: 20px;
-        font-weight: bold;
-        padding: 1.2rem;
-        text-align: center;
+        letter-spacing: 0.5px;
+    }
+
+    /* User Panel */
+    .user-panel {
+        background-color: #f0f3e0; /* Light cream color */
+        border-radius: 10px;
+        margin: 15px 10px;
+        padding: 15px 5px !important;
+    }
+
+    .user-panel .image i {
+        color: #718E3F !important; /* Olive green for user icon */
     }
 
     .user-panel .info a {
-    font-size: 16px;
-    color: #6C4C3B; /* warna coklat gelap */
-    text-decoration: none;
-    font-weight: 600;
-}
-
-
-    .nav-sidebar .nav-link {
-        font-size: 15px;
-        font-weight: 500;
-        color: #333333 !important;
-        border-radius: 8px;
-        margin: 5px 10px;
-        padding: 10px;
-        transition: 0.3s;
-    }
-    
-    .nav-sidebar .nav-link:hover {
-        background-color: #E6F2D9; /* hijau muda saat hover */
-        transform: scale(1.02);
-        color: #333333 !important;
-    }
-
-    .menu-active {
-        background-color: #718E3F !important; /* hijau olive */
-        color: white !important;
+        color: #4d5d2a !important; /* Darker olive for username */
         font-weight: 600;
+        font-size: 15px;
+    }
+
+    /* Menu Items */
+    .nav-sidebar .nav-link {
+        color: #333 !important;
+        border-radius: 8px;
+        margin: 4px 8px;
+        padding: 10px 15px;
+        transition: all 0.3s ease;
+        font-weight: 500;
+    }
+
+    .nav-sidebar .nav-link:hover {
+        background-color: #e7edda; /* Very light olive shade */
+        transform: translateX(3px);
+    }
+
+    /* Active Menu Item */
+    .menu-active {
+        background-color: #718E3F !important;
+        color: white !important;
+        box-shadow: 0 2px 5px rgba(113, 142, 63, 0.4);
     }
 
     .menu-active .nav-icon {
         color: white !important;
     }
 
-    .submenu-active {
-        background-color: #FFC107 !important; /* kuning pastel submenu aktif */
-        color: #343a40 !important;
-        font-weight: 600;
-        border-radius: 8px;
-        margin: 5px 15px;
-        text-align: center;
-    }
-    
-    .submenu-active p {
-        margin: 0;
+    /* Submenu Styling */
+    .nav-treeview {
+        background-color: #f9f9f0; /* Very light cream */
+        border-radius: 6px;
+        margin-left: 15px;
+        padding: 5px 0;
     }
 
+    .nav-treeview .nav-link {
+        font-size: 14px;
+        padding: 8px 10px 8px 20px;
+    }
+
+    /* Active Submenu Item */
+    .submenu-active {
+        background-color: #eaeed6 !important; /* Light cream */
+        color: #4d5d2a !important;
+        border-left: 4px solid #718E3F;
+        font-weight: 600;
+    }
+
+    /* Sidebar Divider */
+    .sidebar hr {
+        border-color: rgba(113, 142, 63, 0.2);
+        width: 85%;
+        margin: 10px auto;
+    }
+
+    /* Icons */
     .nav-icon {
-        color: #6C757D; /* abu icon */
-        font-size: 18px;
-        margin-right: 5px;
+        color: #718E3F !important;
+        margin-right: 8px;
+    }
+
+    /* Dropdown Arrow */
+    .fa-angle-left {
+        color: #718E3F !important;
+    }
+
+    /* Overall Sidebar Transition */
+    .sidebar {
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Section Headers */
+    .nav-header {
+        color: #718E3F;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-size: 12px;
+        margin-top: 15px;
+        padding-left: 15px;
     }
 </style>
 

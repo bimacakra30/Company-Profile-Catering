@@ -79,9 +79,9 @@
     }
 
     .main-header .btn-danger:hover {
-        background-color: #637c35 !important;
+        background-color:rgb(188, 30, 30) !important;
         transform: translateY(-1px);
-        box-shadow: 0 4px 8px rgba(113, 142, 63, 0.4);
+        box-shadow: 0 4px 8px rgb(255, 255, 255);
     }
 
     /* Navbar brand/title */

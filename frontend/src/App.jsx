@@ -1,234 +1,203 @@
-import { useState, useEffect } from 'react';
-import { Star, Phone, Mail, MapPin, Clock, Menu, X } from 'lucide-react';
+import { useEffect, useState } from "react";
+import { Phone, Mail, Instagram, Facebook, Check } from "lucide-react";
 
-export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('beranda');
+export default function SariDewiCatering() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const slides = [
+    {
+      image: "/api/placeholder/1200x600?text=Slide+1",
+      title: "Selamat Datang di Sari Dewi Catering",
+      description: "Solusi Catering Lezat dan Terjangkau untuk Setiap Acara",
+    },
+    {
+      image: "/api/placeholder/1200x600?text=Slide+2",
+      title: "Menu Beragam, Rasa Istimewa",
+      description: "Nikmati Hidangan Pilihan dengan Kualitas Terbaik",
+    },
+    {
+      image: "/api/placeholder/1200x600?text=Slide+3",
+      title: "Pelayanan Profesional dan Ramah",
+      description: "Kami Hadir untuk Membuat Acara Anda Berkesan",
+    },
+  ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('section');
-      const scrollPosition = window.scrollY + 100;
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const sectionId = section.getAttribute('id');
+  const menuItems = [
+    { name: "Nasi Kuning", image: "/api/placeholder/300x200" },
+    { name: "Nasi Uduk", image: "/api/placeholder/300x200" },
+    { name: "Tumpeng", image: "/api/placeholder/300x200" },
+    { name: "Snack Box", image: "/api/placeholder/300x200" },
+  ];
 
-        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-          setActiveSection(sectionId);
-        }
-      });
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
-
-  const services = [
+  const packages = [
     {
-      title: 'Nasi Kotak Premium',
-      description: 'Pilihan menu lengkap dengan nasi, lauk utama, sayuran, dan pelengkap',
-      image: '/api/placeholder/400/300',
-      price: 'Mulai Rp 35.000/box',
+      name: "Paket A",
+      price: "Rp25.000",
+      features: ["Nasi Putih", "Ayam Goreng", "Sayur Asem", "Sambal", "Kerupuk"],
     },
     {
-      title: 'Prasmanan',
-      description: 'Layanan prasmanan untuk berbagai acara dengan beragam menu pilihan',
-      image: '/api/placeholder/400/300',
-      price: 'Mulai Rp 45.000/orang',
+      name: "Paket B",
+      price: "Rp30.000",
+      features: ["Nasi Uduk", "Ayam Bakar", "Urap", "Telur Balado", "Kerupuk"]
     },
     {
-      title: 'Coffee Break',
-      description: 'Paket snack dan minuman untuk meeting dan seminar',
-      image: '/api/placeholder/400/300',
-      price: 'Mulai Rp 25.000/orang',
-    },
-    {
-      title: 'Tumpeng',
-      description: 'Tumpeng untuk acara syukuran dan perayaan spesial',
-      image: '/api/placeholder/400/300',
-      price: 'Mulai Rp 350.000',
+      name: "Paket C",
+      price: "Rp35.000",
+      features: ["Nasi Kuning", "Rendang", "Perkedel", "Sambal Goreng Kentang", "Kerupuk"]
     },
   ];
 
   const testimonials = [
     {
-      name: 'Budi Santoso',
-      company: 'PT. Maju Bersama',
-      review: 'Makanan enak, pelayanan tepat waktu. Sangat memuaskan untuk acara kantor kami.',
-      rating: 5,
+      name: "Siti Aminah",
+      role: "Ibu Rumah Tangga",
+      text: "Pelayanan cepat, makanan enak, semua tamu puas!"
     },
     {
-      name: 'Indah Permata',
-      company: 'Permata Event Organizer',
-      review: 'Sudah berlangganan sejak 2 tahun lalu. Selalu jadi andalan untuk berbagai acara klien kami.',
-      rating: 5,
+      name: "Rudi Hartono",
+      role: "Karyawan Swasta",
+      text: "Sudah langganan catering di sini. Tidak pernah mengecewakan."
     },
     {
-      name: 'Rudi Hermawan',
-      company: 'Kementerian Perekonomian',
-      review: 'Kualitas premium dengan harga yang sesuai. Presentasi makanan sangat menarik.',
-      rating: 4,
-    },
+      name: "Dewi Lestari",
+      role: "Event Organizer",
+      text: "Sari Dewi Catering selalu menjadi pilihan utama untuk event kami."
+    }
   ];
 
   return (
-    <div className="font-sans">
-      {/* TopBar */}
-      <div className="bg-amber-500 text-white py-1">
-        <div className="container mx-auto flex justify-end px-4">
-          <div className="flex gap-4">
-            <a href="#" className="hover:text-amber-200">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-instagram"
-              >
-                <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-              </svg>
-            </a>
-            <a href="#" className="hover:text-amber-200">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-facebook"
-              >
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
-              </svg>
-            </a>
+    <div>
+      <header className="bg-white shadow-md fixed top-0 w-full z-50">
+        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="text-2xl font-bold text-green-700">Sari Dewi Catering</div>
+          <nav className="hidden md:flex space-x-6 text-gray-700">
+            <a href="#about">Tentang Kami</a>
+            <a href="#menu">Menu</a>
+            <a href="#package">Paket</a>
+            <a href="#testimonial">Testimoni</a>
+            <a href="#contact">Kontak</a>
+          </nav>
+          <div className="md:hidden">
+            <button onClick={() => setMenuOpen(!menuOpen)}>
+              <span className="text-xl">☰</span>
+            </button>
           </div>
         </div>
-      </div>
-
-      {/* Header */}
-      <header className="bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center">
-              <img src="/api/placeholder/50/50" alt="Logo" className="h-12 w-auto mr-4" />
-              <div>
-                <h1 className="text-xl font-semibold text-amber-800">Dandanggulo</h1>
-                <p className="text-xs text-amber-600">Katering Premium Madiun</p>
-              </div>
-            </div>
-
-            {/* Desktop Menu */}
-            <nav className="hidden md:flex">
-              <ul className="flex space-x-8">
-                {['beranda', 'tentang-kami', 'layanan', 'review', 'contact'].map((section) => (
-                  <li key={section}>
-                    <a
-                      href={`#${section}`}
-                      className={`${
-                        activeSection === section ? 'text-amber-600 font-semibold' : 'text-gray-700'
-                      } hover:text-amber-500`}
-                    >
-                      {section.replace('-', ' ').toUpperCase()}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button onClick={toggleMenu} className="text-gray-700">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+        {menuOpen && (
+          <div className="md:hidden bg-white px-4 pb-4">
+            <a className="block py-2" href="#about">Tentang Kami</a>
+            <a className="block py-2" href="#menu">Menu</a>
+            <a className="block py-2" href="#package">Paket</a>
+            <a className="block py-2" href="#testimonial">Testimoni</a>
+            <a className="block py-2" href="#contact">Kontak</a>
           </div>
-
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="md:hidden py-4 border-t">
-              <ul className="space-y-4">
-                {['beranda', 'tentang-kami', 'layanan', 'review', 'contact'].map((section) => (
-                  <li key={section}>
-                    <a
-                      href={`#${section}`}
-                      onClick={toggleMenu}
-                      className={`${
-                        activeSection === section ? 'text-amber-600 font-semibold' : 'text-gray-700'
-                      } block`}
-                    >
-                      {section.replace('-', ' ').toUpperCase()}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-        </div>
+        )}
       </header>
 
-      {/* Main Content */}
-      <main>
-        {/* Hero Section */}
-        <section id="beranda" className="relative bg-amber-50">
-          <div
-            className="bg-cover bg-center h-screen"
-            style={{ backgroundImage: `url('/api/placeholder/1920/1080')` }}
-          >
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center">
-              <div className="container mx-auto px-4 text-center text-white">
-                <h1 className="text-4xl md:text-6xl font-bold mb-4">KATERING PREMIUM MADIUN</h1>
-                <p className="text-xl md:text-2xl mb-6">Dipercaya oleh Perusahaan Besar, Artis hingga Pejabat.</p>
-                <p className="text-lg md:text-xl mb-8">
-                  Siap Dadakan, Garansi Tepat Waktu atau Uang Kembali 100%!
-                </p>
-                <div className="flex justify-center gap-4 flex-wrap">
-                  <a
-                    href="#layanan"
-                    className="bg-amber-600 hover:bg-amber-700 text-white px-8 py-3 rounded-md font-semibold transition-all"
-                  >
-                    Produk Kami
-                  </a>
-                  <a
-                    href="#contact"
-                    className="bg-white hover:bg-gray-100 text-amber-800 px-8 py-3 rounded-md font-semibold transition-all"
-                  >
-                    Hubungi Kami
-                  </a>
-                </div>
+      <section className="pt-20">
+        <div className="relative h-[60vh] overflow-hidden">
+          {slides.map((slide, index) => (
+            <div key={index} className={`absolute inset-0 transition-opacity duration-1000 ${currentSlide === index ? 'opacity-100' : 'opacity-0'}`}>
+              <img src={slide.image} alt="Slide" className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white text-center">
+                <h2 className="text-3xl md:text-5xl font-bold mb-4">{slide.title}</h2>
+                <p className="text-lg md:text-2xl">{slide.description}</p>
               </div>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </section>
 
-        {/* Other Sections */}
-        {/* Tentang Kami, Layanan, Review, Contact */}
-        {/* These sections are already well-structured in your code */}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-amber-800 text-white py-12">
+      <section id="about" className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Footer Content */}
-          </div>
-          <div className="border-t border-amber-700 mt-8 pt-8 text-center text-amber-300 text-sm">
-            <p>© {new Date().getFullYear()} Dandanggulo. All Rights Reserved.</p>
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Tentang Kami</h2>
+          <p className="text-center text-gray-600 max-w-2xl mx-auto">
+            Sari Dewi Catering telah berdiri sejak tahun 2010, menyediakan layanan catering untuk berbagai acara seperti ulang tahun, pernikahan, arisan, dan acara perusahaan. Kami mengutamakan kualitas rasa dan pelayanan yang profesional.
+          </p>
+        </div>
+      </section>
+
+      <section id="menu" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Menu Favorit</h2>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {menuItems.map((item, index) => (
+              <div key={index} className="bg-white rounded-lg shadow p-4 text-center">
+                <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded mb-4" />
+                <h3 className="text-lg font-semibold text-gray-700">{item.name}</h3>
+              </div>
+            ))}
           </div>
         </div>
+      </section>
+
+      <section id="package" className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Paket Layanan</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {packages.map((pack, index) => (
+              <div key={index} className="bg-gray-100 rounded-lg shadow p-6">
+                <h3 className="text-xl font-bold text-green-700 mb-2">{pack.name}</h3>
+                <p className="text-2xl font-semibold text-gray-800 mb-4">{pack.price}</p>
+                <ul className="text-gray-700 space-y-2">
+                  {pack.features.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <Check className="w-5 h-5 text-green-600 mr-2 mt-0.5" /> {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonial" className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Testimoni Pelanggan</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {testimonials.map((t, index) => (
+              <div key={index} className="bg-white rounded-lg shadow p-6 text-center">
+                <p className="text-gray-600 italic mb-4">"{t.text}"</p>
+                <h4 className="text-lg font-semibold text-green-700">{t.name}</h4>
+                <p className="text-sm text-gray-500">{t.role}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" className="py-16 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Hubungi Kami</h2>
+          <p className="text-gray-600 mb-4">Kami siap membantu Anda merencanakan acara terbaik Anda.</p>
+          <div className="flex justify-center space-x-6 text-green-700">
+            <a href="tel:+6281234567890" className="flex items-center space-x-2 hover:text-green-900">
+              <Phone /> <span>+62 812-3456-7890</span>
+            </a>
+            <a href="mailto:info@saridewicatering.com" className="flex items-center space-x-2 hover:text-green-900">
+              <Mail /> <span>info@saridewicatering.com</span>
+            </a>
+            <a href="https://instagram.com/saridewicatering" className="flex items-center space-x-2 hover:text-green-900" target="_blank" rel="noreferrer">
+              <Instagram /> <span>@saridewicatering</span>
+            </a>
+            <a href="https://facebook.com/saridewicatering" className="flex items-center space-x-2 hover:text-green-900" target="_blank" rel="noreferrer">
+              <Facebook /> <span>Sari Dewi Catering</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <footer className="bg-gray-100 py-6 text-center text-gray-600">
+        <p>&copy; 2025 Sari Dewi Catering. All rights reserved.</p>
       </footer>
     </div>
   );

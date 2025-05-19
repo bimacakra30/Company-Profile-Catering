@@ -1,42 +1,321 @@
-#root {
-  max-width: 1280px;
+/* App.css */
+
+/* General Styles */
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #FFF8E1; /* Cream color */
+}
+
+.container {
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0 15px;
+}
+
+/* Header Styles */
+header {
+  background-color: #FFFFFF; /* White color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+}
+
+header .text-2xl {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #004d40; /* Dark green color */
+}
+
+header nav a {
+  color: #4B5563; /* Gray color */
+  margin-right: 24px;
+  text-decoration: none;
+}
+
+header nav a:hover {
+  color: #004d40; /* Dark green color */
+}
+
+header .md\\:hidden button {
+  font-size: 1.25rem;
+}
+
+/* Slide Section Styles */
+section.pt-20 {
+  padding-top: 5rem;
+}
+
+section .relative {
+  position: relative;
+  height: 60vh;
+  overflow: hidden;
+}
+
+section .relative img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+section .relative .absolute {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+
+section .relative .absolute h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+section .relative .absolute p {
+  font-size: 1.25rem;
+}
+
+/* About Section Styles */
+section#about {
+  padding: 4rem 0;
+  background-color: #FFFFFF; /* White color */
+}
+
+section#about h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 32px;
+}
+
+section#about p {
+  text-align: center;
+  color: #6B7280; /* Gray color */
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Menu Section Styles */
+section#menu {
+  padding: 4rem 0;
+  background-color: #FFF8E1; /* Cream color */
+}
+
+section#menu h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 32px;
+}
+
+section#menu .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  section#menu .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+section#menu .grid div {
+  background-color: #FFFFFF; /* White color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+section#menu .grid div img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 16px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+section#menu .grid div h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151; /* Gray color */
+}
+
+/* Package Section Styles */
+section#package {
+  padding: 4rem 0;
+  background-color: #FFFFFF; /* White color */
+}
+
+section#package h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 32px;
+}
+
+section#package .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  section#package .grid {
+    grid-template-columns: repeat(3, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+section#package .grid div {
+  background-color: #E0F2F1; /* Light green color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+}
+
+section#package .grid div h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #004d40; /* Dark green color */
+  margin-bottom: 8px;
+}
+
+section#package .grid div p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 16px;
+}
+
+section#package .grid div ul {
+  color: #374151; /* Gray color */
+}
+
+section#package .grid div ul li {
+  display: flex;
+  align-items: start;
+}
+
+section#package .grid div ul li svg {
+  width: 20px;
+  height: 20px;
+  color: #004d40; /* Dark green color */
+  margin-right: 8px;
+  margin-top: 2px;
+}
+
+/* Testimonial Section Styles */
+section#testimonial {
+  padding: 4rem 0;
+  background-color: #FFF8E1; /* Cream color */
+}
+
+section#testimonial h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 32px;
+}
+
+section#testimonial .grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  section#testimonial .grid {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+section#testimonial .grid div {
+  background-color: #FFFFFF; /* White color */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  text-align: center;
 }
 
-.card {
-  padding: 2em;
+section#testimonial .grid div p {
+  color: #6B7280; /* Gray color */
+  font-style: italic;
+  margin-bottom: 16px;
 }
 
-.read-the-docs {
-  color: #888;
+section#testimonial .grid div h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #004d40; /* Dark green color */
+}
+
+section#testimonial .grid div p:last-child {
+  font-size: 0.875rem;
+  color: #9CA3AF; /* Light gray color */
+}
+
+/* Contact Section Styles */
+section#contact {
+  padding: 4rem 0;
+  background-color: #FFFFFF; /* White color */
+}
+
+section#contact h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #1F2937; /* Gray color */
+  margin-bottom: 24px;
+}
+
+section#contact p {
+  color: #6B7280; /* Gray color */
+  margin-bottom: 16px;
+}
+
+section#contact .flex {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  color: #004d40; /* Dark green color */
+}
+
+section#contact .flex a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+section#contact .flex a:hover {
+  color: #00332c; /* Darker green color */
+}
+
+/* Footer Styles */
+footer {
+  background-color: #E0F2F1; /* Light green color */
+  padding: 24px 0;
+  text-align: center;
+  color: #6B7280; /* Gray color */
 }

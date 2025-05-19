@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Phone, Mail, Instagram, Facebook, Check } from "lucide-react";
+import './App.css'; 
 
 export default function SariDewiCatering() {
   const [currentSlide, setCurrentSlide] = useState(0);

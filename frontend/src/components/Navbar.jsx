@@ -1,29 +1,43 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
+import axios from "axios";
 import "./Navbar.css";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [layananItems, setLayananItems] = useState([]);
 
-  const layananItems = [
-    { label: "Paket Prasmanan", path: "/layanan/prasmanan" },
-    { label: "Paket Gubug", path: "/layanan/gubug" },
-    { label: "Paket Nasi Box", path: "/layanan/nasi-box" },
-    { label: "Paket Racikan", path: "/layanan/racikan" },
-    { label: "Paket Menu Spesial", path: "/layanan/menu-spesial" },
-  ];
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const response = await axios.get("http://127.0.0.1:8000/api/categories");
+        setLayananItems(response.data);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    }
+    fetchCategories();
+  }, []);
 
   const menuItems = [
     { label: "Beranda", path: "/" },
     { label: "Tentang Kami", path: "/tentang" },
-    { label: "Layanan Catering", submenu: layananItems },
+    { label: "Layanan Catering", submenu: layananItems.map(cat => ({
+        label: cat.name_category,
+        path: `/layanan/${slugify(cat.name_category)}`
+      }))
+    },
     { label: "Galeri", path: "/galeri" },
     { label: "Ulasan", path: "/ulasan" },
     { label: "Portofolio", path: "/portofolio" },
     { label: "Kontak", path: "/kontak" },
   ];
+
+  function slugify(text) {
+    return text.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]+/g, '');
+  }
 
   return (
     <header className="bg-white shadow-md fixed top-0 w-full z-50">

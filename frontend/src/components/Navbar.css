@@ -1,0 +1,126 @@
+/* Navbar container */
+header {
+  font-family: 'Merriweather', serif;
+  background-color: white;
+  z-index: 50;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Link umum */
+nav a,
+nav button {
+  font-size: 16px;
+  font-weight: 400;
+  color: #434f2a;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* Hover efek underline */
+nav a:hover,
+nav button:hover {
+  color: #205e2e;
+}
+
+/* Underline efek animasi */
+nav .group:hover span {
+  width: 100%;
+}
+
+/* Dropdown container */
+nav .group {
+  position: relative;
+}
+
+/* Dropdown menu */
+nav .group .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  margin-top: 8px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+  z-index: 100;
+}
+
+/* Show dropdown on hover */
+nav .group:hover .dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown item */
+nav .dropdown a {
+  display: block;
+  padding: 12px 24px;
+  font-size: 1rem;
+  color: #111;
+  white-space: nowrap;
+  transition: background-color 0.3s, color 0.3s;
+  text-transform: none;
+}
+
+/* Hover dropdown item */
+nav .dropdown a:hover {
+  background-color: #f4f4f4;
+  color: #205e2e;
+}
+
+.whatsapp-button {
+  background-color: #015b2d !important;
+  color: #f5f5c3;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-decoration: none;
+  font-family: serif;
+  font-size: 0.9rem;
+  text-transform: capitalize;
+  transition: background-color 0.3s;
+}
+
+.whatsapp-button:hover {
+  background-color: #014722 !important;
+}
+
+/* Mobile menu animation */
+@keyframes slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slide-down 0.3s ease-out forwards;
+}
+
+/* Mobile dropdown */
+@media (max-width: 768px) {
+  .mobile-dropdown {
+    background-color: white;
+    padding-left: 1rem;
+  }
+
+  .mobile-dropdown a {
+    display: block;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    color: #444;
+  }
+
+  .mobile-dropdown a:hover {
+    color: #205e2e;
+  }
+}

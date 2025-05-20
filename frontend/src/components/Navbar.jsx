@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, ChevronDown } from "lucide-react";
-import axios from "axios";
+import { getCategories } from "../services/api"; // sesuaikan pathnya
 import "./Navbar.css";
 
 export default function Navbar() {
@@ -12,8 +12,8 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchCategories() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/categories");
-        setLayananItems(response.data);
+        const response = await getCategories();
+        setLayananItems(response.data); // langsung array dari API
       } catch (error) {
         console.error("Failed to fetch categories:", error);
       }
@@ -24,10 +24,12 @@ export default function Navbar() {
   const menuItems = [
     { label: "Beranda", path: "/" },
     { label: "Tentang Kami", path: "/tentang" },
-    { label: "Layanan Catering", submenu: layananItems.map(cat => ({
+    {
+      label: "Layanan Catering",
+      submenu: layananItems.map(cat => ({
         label: cat.name_category,
-        path: `/layanan/${slugify(cat.name_category)}`
-      }))
+        path: `/layanan/${slugify(cat.name_category)}`,
+      })),
     },
     { label: "Galeri", path: "/galeri" },
     { label: "Ulasan", path: "/ulasan" },

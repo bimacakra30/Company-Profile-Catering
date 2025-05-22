@@ -5,9 +5,10 @@ export default function Gallery() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://api.example.com/gallery") // GANTI dengan URL API Anda
+    fetch("http://127.0.0.1:8000/api/galeri") // Ganti dengan URL endpoint API Anda
       .then((res) => res.json())
       .then((data) => {
+        console.log("Data galeri:", data);
         setImages(data);
         setLoading(false);
       })
@@ -38,11 +39,17 @@ export default function Gallery() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {images.map((img) => (
               <div key={img.id} className="overflow-hidden rounded-lg shadow-md group">
-                <img
-                  src={img.url}
-                  alt={`Galeri ${img.id}`}
-                  className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
-                />
+                {img.url ? (
+                  <img
+                    src={img.url}
+                    alt={`Galeri ${img.id}`}
+                    className="w-full h-64 object-cover transform group-hover:scale-105 transition duration-300"
+                  />
+                ) : (
+                  <div className="w-full h-64 bg-gray-200 flex items-center justify-center text-gray-500">
+                    Gambar tidak tersedia
+                  </div>
+                )}
               </div>
             ))}
           </div>

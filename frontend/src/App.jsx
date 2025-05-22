@@ -12,6 +12,7 @@ import Menu from "./pages/Menu";
 import Testimonial from "./pages/Testimonial";
 import Contact from "./pages/Contact";
 import Gallery from "./pages/Gallery";
+import Portfolio from "./pages/Portfolio";
 
 function App() {
   return (
@@ -27,6 +28,8 @@ function App() {
             <Route path="/testimoni" element={<Testimonial />} />
             <Route path="/kontak" element={<Contact />} />
             <Route path="/galeri" element={<Gallery />} />
+            <Route path="/portofolio" element={<Portfolio />} />
+
           </Routes>
         </main>
 

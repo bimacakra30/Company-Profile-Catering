@@ -16,10 +16,10 @@ const Footer = () => {
       <div className="footer-container">
         <div className="footer-section company-info">
           <p>
-            <strong>Sari Dewi Catering</strong> senantiasa menyajikan makanan dengan
-            standar cita rasa yang berkelas. Diolah oleh para koki profesional dan
-            memiliki passion yang tinggi dalam menyajikan{" "}
-            <strong>sajian masakan yang lezat, halal, dan berkualitas.</strong>
+            <strong>Dandanggulo</strong> selalu berkomitmen menghadirkan hidangan rumahan
+             yang lezat dan penuh kehangatan. Dimasak dengan sepenuh hati oleh keluarga kami,
+            {" "}
+            <strong>setiap sajian dibuat dari bahan pilihan, halal, dan berkualitas</strong>
           </p>
           <div className="footer-socials">
             <a href="#"><FaFacebookF /> FACEBOOK</a>

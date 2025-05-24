@@ -11,6 +11,18 @@ import {
 } from "react-icons/fa";
 
 const Footer = () => {
+  // Assume you fetch categories from props or context, or use a placeholder for now
+  // Example: const categories = props.categories || [];
+  // For demonstration, using a static array (replace with dynamic data fetching as needed)
+  const categories = [
+    { name: "Prasmanan", slug: "prasmanan" },
+    { name: "Gubug", slug: "gubug" },
+    { name: "Nasi Box", slug: "nasi-box" },
+    { name: "Hampers", slug: "hampers" },
+    { name: "Menu Spesial", slug: "menu-spesial" },
+    { name: "Racikan", slug: "racikan" },
+  ];
+
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -30,12 +42,11 @@ const Footer = () => {
         <div className="footer-section services">
           <h3>PAKET LAYANAN</h3>
           <ul>
-            <li><Link to="/menu">➜ Prasmanan</Link></li>
-            <li><Link to="/menu">➜ Gubug</Link></li>
-            <li><Link to="/menu">➜ Nasi Box</Link></li>
-            <li><Link to="/menu">➜ Hampers</Link></li>
-            <li><Link to="/menu">➜ Menu Spesial</Link></li>
-            <li><Link to="/menu">➜ Racikan</Link></li>
+            {categories.map((cat) => (
+              <li key={cat.slug}>
+                <Link to={`/menu/${cat.slug}`}>➜ {cat.name}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 

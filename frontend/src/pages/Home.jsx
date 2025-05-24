@@ -384,63 +384,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Contact CTA Section */}
-      <section className="py-24 bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-64 h-64 border border-white rounded-full"></div>
-          <div className="absolute bottom-0 left-0 w-32 h-32 border border-white rounded-full"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-white rounded-full"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 text-center relative z-10">
-          <span className="inline-block px-6 py-2 bg-white/20 text-white rounded-full text-sm font-medium mb-6">
-            📞 Hubungi Kami
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">
-            Wujudkan Acara Impian Anda
-          </h2>
-          <p className="text-xl mb-8 max-w-3xl mx-auto opacity-90">
-            Konsultasikan kebutuhan catering Anda dengan tim profesional kami. 
-            Dapatkan penawaran terbaik dan pelayanan yang memuaskan.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="https://wa.me/6285106511818"
-              className="group bg-white text-[#434f2a] px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center"
-            >
-              <FaWhatsapp className="mr-2 text-green-500" />
-              WhatsApp: 0851 0651 1818
-            </a>
-            <a
-              href="tel:(0274)865829"
-              className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#434f2a] transition-all duration-300 flex items-center"
-            >
-              <Phone className="mr-2" />
-              Telepon: (0274) 865829
-            </a>
-          </div>
-
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center">
-              <Clock className="w-12 h-12 mx-auto mb-4 opacity-80" />
-              <h3 className="font-semibold mb-2">Jam Operasional</h3>
-              <p className="opacity-80">Senin - Sabtu: 08:00 - 17:00</p>
-            </div>
-            <div className="text-center">
-              <MapPin className="w-12 h-12 mx-auto mb-4 opacity-80" />
-              <h3 className="font-semibold mb-2">Lokasi</h3>
-              <p className="opacity-80">Jl. Magelang KM.10, Sleman</p>
-            </div>
-            <div className="text-center">
-              <Mail className="w-12 h-12 mx-auto mb-4 opacity-80" />
-              <h3 className="font-semibold mb-2">Email</h3>
-              <p className="opacity-80">catering_sari.dewi@yahoo.co.id</p>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

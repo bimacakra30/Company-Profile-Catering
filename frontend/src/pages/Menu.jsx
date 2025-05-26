@@ -1,45 +1,90 @@
-import { Check } from "lucide-react";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getProducts } from "../services/api";
 
-export default function Menu() {
-  const menuItems = [/* data seperti sebelumnya */];
-  const packages = [/* data seperti sebelumnya */];
+export default function MenuByCategory() {
+  const { slug } = useParams();
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      setError("");
+
+      try {
+        const response = await getProducts();
+        const allProducts = response.data.products;
+
+        const filtered = allProducts.filter(
+          item =>
+            item.category?.name_category
+              ?.toLowerCase()
+              .replace(/\s+/g, "-") === slug
+        );
+
+        setProducts(filtered);
+      } catch (err) {
+        console.error("Gagal memuat data:", err);
+        setError("Terjadi kesalahan saat mengambil data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [slug]);
+
+  const titleCase = (text) =>
+    text.replace(/-/g, " ").replace(/\b\w/g, (char) => char.toUpperCase());
 
   return (
-    <div className="pt-24">
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Menu Favorit</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {menuItems.map((item, index) => (
-              <div key={index} className="bg-white rounded-lg shadow p-4 text-center">
-                <img src={item.image} alt={item.name} className="w-full h-40 object-cover rounded mb-4" />
-                <h3 className="text-lg font-semibold text-gray-700">{item.name}</h3>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="pt-24 px-6 pb-12">
+      <h2 className="text-3xl font-bold text-center mb-8 text-gray-800">
+        Menu Favorit - {titleCase(slug)}
+      </h2>
 
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">Paket Layanan</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {packages.map((pack, index) => (
-              <div key={index} className="bg-gray-100 rounded-lg shadow p-6">
-                <h3 className="text-xl font-bold text-green-700 mb-2">{pack.name}</h3>
-                <p className="text-2xl font-semibold text-gray-800 mb-4">{pack.price}</p>
-                <ul className="text-gray-700 space-y-2">
-                  {pack.features.map((feature, idx) => (
-                    <li key={idx} className="flex items-start">
-                      <Check className="w-5 h-5 text-green-600 mr-2 mt-0.5" /> {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+      {loading ? (
+        <p className="text-center text-gray-500">Memuat data...</p>
+      ) : error ? (
+        <p className="text-center text-red-600">{error}</p>
+      ) : products.length === 0 ? (
+        <p className="text-center text-gray-500">
+          Belum ada menu di kategori ini.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {products.map((product) => (
+            <div
+              key={product.id_product}
+              className="bg-white rounded-lg shadow p-4"
+            >
+              <img
+                src={`http://127.0.0.1:8000/storage/${product.path_image}`}
+                alt={product.name_product}
+                className="w-full h-48 object-cover rounded mb-3"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = "https://via.placeholder.com/400x300?text=No+Image";
+                }}
+              />
+              <h3 className="text-lg font-semibold text-gray-700">
+                {product.name_product}
+              </h3>
+              <p className="text-green-700 font-bold">
+                Rp{" "}
+                {Number(product.price_product).toLocaleString("id-ID", {
+                  minimumFractionDigits: 0,
+                })}
+              </p>
+              <p className="text-sm mt-2 text-gray-600">
+                {product.description}
+              </p>
+            </div>
+          ))}
         </div>
-      </section>
+      )}
     </div>
   );
 }

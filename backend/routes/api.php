@@ -12,5 +12,6 @@ Route::get('/galleries', [GalleryController::class, 'index']);
 Route::get('/portfolios', [PortfolioController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 Route::get('/reviews', [ReviewController::class, 'index']);
+Route::post('/reviews', [ReviewController::class, 'store']);
 
 

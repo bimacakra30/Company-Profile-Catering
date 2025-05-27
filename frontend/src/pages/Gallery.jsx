@@ -48,8 +48,9 @@ export default function Gallery() {
                   alt={img.name_event || `Galeri ${img.id_gallery}`}
                   className="w-full h-32 object-cover transform group-hover:scale-105 transition duration-300"
                 />
+
                 <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center opacity-0 group-hover:opacity-100 transition">
-                  {img.name_event}
+                  {img.name_event} {img.date && `| ${img.date}`}
                 </div>
               </div>
             ))}

@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { getReviews, postReview } from '../services/api';
+import { ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
+
+const ITEMS_PER_PAGE = 6;
 
 const Testimonial = () => {
   const [reviews, setReviews] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [showForm, setShowForm] = useState(false);
   const [name, setName] = useState('');
   const [review, setReview] = useState('');
   const [loading, setLoading] = useState(false);
@@ -32,6 +37,8 @@ const Testimonial = () => {
       await fetchReviews();
       setName('');
       setReview('');
+      setShowForm(false);
+      setCurrentPage(0); // Reset ke halaman pertama
     } catch (err) {
       console.error(err);
       setError('Gagal mengirim ulasan. Cek koneksi atau format data.');
@@ -40,29 +47,106 @@ const Testimonial = () => {
     }
   };
 
+  // Paging logic
+  const totalPages = Math.ceil(reviews.length / ITEMS_PER_PAGE);
+  const paginatedReviews = reviews.slice(
+    currentPage * ITEMS_PER_PAGE,
+    (currentPage + 1) * ITEMS_PER_PAGE
+  );
+
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1 < totalPages ? prev + 1 : prev));
+  };
+
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 >= 0 ? prev - 1 : prev));
+  };
+
   useEffect(() => {
     fetchReviews();
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8] py-12">
+    <div className="pt-20 min-h-screen bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8] py-12">
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-[#434f2a] mb-4">Testimoni Pelanggan</h1>
           <p className="text-lg text-[#205e2e] italic max-w-2xl mx-auto">
             Kepuasan pelanggan adalah kebanggaan kami. Dengarkan cerita mereka tentang pengalaman bersama Dandanggulo.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Form */}
-          <div className="bg-white rounded-3xl shadow-xl p-8 border border-[#f7f3e8]">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-[#434f2a] mb-2">Bagikan Pengalaman Anda</h2>
-              <p className="text-gray-600">Ceritakan kepada kami bagaimana layanan catering Dandanggulo</p>
-            </div>
+        {/* Testimoni Grid */}
+        {reviews.length === 0 ? (
+          <div className="text-center text-gray-600">Belum ada testimoni.</div>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+            {paginatedReviews.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-2xl shadow-md p-6 border border-[#f7f3e8]"
+              >
+                <h4 className="font-bold text-[#434f2a] text-lg mb-2">{item.customer_name}</h4>
+                <p className="text-gray-700 mb-3">"{item.review_text}"</p>
+                <p className="text-sm text-gray-500 mb-2">
+                  {new Date(item.created_at).toLocaleDateString('id-ID', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                  })}
+                </p>
 
+                {item.respon_text && (
+                  <div className="mt-3 p-3 bg-[#f0fdf4] border-l-4 border-[#22c55e] rounded-md text-left">
+                    <p className="text-sm text-gray-700 italic mb-1">
+                      Balasan dari <strong>{item.user?.name || 'Admin'}</strong>:
+                    </p>
+                    <p className="text-gray-800">"{item.respon_text}"</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Navigasi Halaman */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center space-x-4 mb-10">
+            <button
+              onClick={prevPage}
+              disabled={currentPage === 0}
+              className="p-2 bg-white rounded-full shadow hover:bg-gray-100 disabled:opacity-40"
+            >
+              <ChevronLeft />
+            </button>
+            <span className="text-[#434f2a] font-semibold">
+              Halaman {currentPage + 1} dari {totalPages}
+            </span>
+            <button
+              onClick={nextPage}
+              disabled={currentPage === totalPages - 1}
+              className="p-2 bg-white rounded-full shadow hover:bg-gray-100 disabled:opacity-40"
+            >
+              <ChevronRight />
+            </button>
+          </div>
+        )}
+
+        {/* Toggle Form */}
+        <div className="flex justify-center mb-6">
+          <button
+            onClick={() => setShowForm(!showForm)}
+            className="flex items-center gap-2 bg-[#205e2e] hover:bg-[#2e7033] text-white font-semibold px-6 py-3 rounded-xl transition"
+          >
+            {showForm ? <X className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
+            {showForm ? 'Tutup Formulir' : 'Tambah Testimoni'}
+          </button>
+        </div>
+
+        {/* Formulir Testimoni */}
+        {showForm && (
+          <div className="bg-white rounded-3xl shadow-xl p-8 border border-[#f7f3e8] mb-6 max-w-2xl mx-auto">
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-[#434f2a] font-semibold mb-2">Nama Lengkap</label>
@@ -103,44 +187,7 @@ const Testimonial = () => {
               )}
             </form>
           </div>
-
-          {/* Reviews */}
-          <div>
-            <h2 className="text-3xl font-bold text-[#434f2a] mb-4">Apa Kata Mereka</h2>
-            <div className="space-y-6 max-h-96 overflow-y-auto pr-2">
-              {reviews.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 text-lg">Belum ada testimoni.</p>
-                  <p className="text-gray-400 text-sm mt-2">Jadilah yang pertama memberikan ulasan!</p>
-                </div>
-              ) : (
-                reviews.map((rev, idx) => (
-                  <div key={idx} className="bg-white rounded-2xl shadow-lg p-6 border border-[#f7f3e8]">
-                    <h4 className="font-bold text-[#434f2a] text-lg">{rev.customer_name}</h4>
-                    <p className="text-gray-700 mb-3 leading-relaxed">"{rev.review_text}"</p>
-                    <div className="text-sm text-gray-500 mb-2">
-                      {new Date(rev.created_at).toLocaleDateString('id-ID', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </div>
-
-                    {/* Balasan Admin */}
-                    {rev.respon_text && (
-                      <div className="mt-4 p-4 bg-[#f0fdf4] border-l-4 border-[#22c55e] rounded-md">
-                        <p className="text-sm text-gray-700 italic mb-1">
-                          Balasan dari <strong>{rev.user?.name || 'Admin'}</strong>:
-                        </p>
-                        <p className="text-gray-800">"{rev.respon_text}"</p>
-                      </div>
-                    )}
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     </div>
   );

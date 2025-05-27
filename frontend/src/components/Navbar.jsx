@@ -57,7 +57,7 @@ export default function Navbar() {
           to="/"
           className={`font-serif font-bold tracking-wide text-[#434f2a] hover:text-[#205e2e] transition-all duration-300 ${scrolled ? "text-lg" : "text-xl"}`}
         >
-          DANDANG GULO CATERING
+          DANDANGGULO CATERING
         </Link>
 
         {/* Desktop Navigation */}
@@ -97,7 +97,7 @@ export default function Navbar() {
 
         {/* WhatsApp Button Desktop */}
         <a
-          href="https://wa.me/6281234567890"
+          href="https://wa.me/6285790220407"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden lg:flex items-center bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-4 py-2.5 rounded-full font-semibold hover:shadow-xl transition-all duration-300 text-sm"

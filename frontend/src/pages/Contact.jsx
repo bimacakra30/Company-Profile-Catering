@@ -8,7 +8,7 @@ export default function Contact() {
         {/* Header */}
         <div className="text-center mb-20">
           <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">
-            Dandanggulo
+            Dandanggulo Catering
           </h2>
           <p className="text-[#205e2e] italic text-lg font-light">
             Hubungi Kami Kapan Saja
@@ -35,22 +35,22 @@ export default function Contact() {
                   {
                     icon: <FaWhatsapp className="text-white text-base" />,
                     title: "WhatsApp",
-                    text: "0851 0651 1818",
+                    text: "0857 9022 0407",
                   },
                   {
                     icon: <Phone className="text-white h-4 w-4" />,
                     title: "Telepon",
-                    text: "(0274) 865829",
+                    text: "0857 9022 0407",
                   },
                   {
                     icon: <Mail className="text-white h-4 w-4" />,
                     title: "Email",
-                    text: "catering_sari.dewi@yahoo.co.id",
+                    text: "@yahoo.co.id",
                   },
                   {
                     icon: <MapPin className="text-white h-4 w-4" />,
                     title: "Alamat",
-                    text: "Jl. Magelang KM.10, Josari, Tridadi, Sleman, DIY 55511",
+                    text: "Jl. Cisadane, Pereng, Mejayan, Kab. Madiun, Jawa Timur 63153",
                   },
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-start space-x-3 hover:bg-[#f7f3e8] p-3 rounded-xl">
@@ -76,8 +76,8 @@ export default function Contact() {
             </div>
             <div className="rounded-xl overflow-hidden h-full">
               <iframe
-                title="Lokasi Sari Dewi Catering"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.414143800524!2d110.32087377477603!3d-7.529167292495778!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7aee3e1a688eb7%3A0x6cf50a3641e0d1cb!2sJl.%20Magelang%20No.KM.10%2C%20Josari%2C%20Tridadi%2C%20Kec.%20Sleman%2C%20Kabupaten%20Sleman%2C%20Daerah%20Istimewa%20Yogyakarta%2055511!5e0!3m2!1sen!2sid!4v1716814940274!5m2!1sen!2sid"
+                title="Lokasi Dandanggulo Catering"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3955.2791912204684!2d111.6688604!3d-7.5445017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e79c9968cdb67c7%3A0xb295f481ab30366d!2sDandanggulo%20katering%20Caruban!5e0!3m2!1sid!2sid!4v1748315392554!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 className="border-0 rounded-xl"
@@ -115,9 +115,9 @@ export default function Contact() {
           </div>
           <div className="grid md:grid-cols-3 gap-4 px-2">
             {[
-              { hari: "Senin - Jumat", jam: "08:00 - 17:00 WIB", catatan: "Pelayanan konsultasi dan pemesanan" },
-              { hari: "Sabtu", jam: "08:00 - 15:00 WIB", catatan: "Pelayanan terbatas konsultasi" },
-              { hari: "Minggu", jam: "Tutup", catatan: "Kecuali untuk acara khusus" },
+              { hari: "Senin - Jumat", jam: "08:00 - 20:00 WIB", catatan: "Pelayanan Konsultasi dan Pemesanan" },
+              { hari: "Sabtu", jam: "08:00 - 15:00 WIB", catatan: "Pelayanan Terbatas Konsultasi" },
+              { hari: "Minggu", jam: "Tersedia di CFD", catatan: "Buka Lapak di Caruban Fun Day" },
             ].map((item, idx) => (
               <div
                 key={idx}

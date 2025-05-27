@@ -19,14 +19,14 @@ const Footer = () => {
         <div className="md:col-span-5 space-y-2">
           <div className="flex items-center space-x-2">
             <FaUtensils className="text-lg" />
-            <h2 className="text-lg font-bold font-serif">Dandanggulo</h2>
+            <h2 className="text-lg font-bold font-serif">Dandanggulo Catering</h2>
           </div>
           <p className="text-white/90 text-sm leading-snug font-serif">
             Selalu berkomitmen menghadirkan hidangan rumahan yang lezat dan penuh kehangatan.
           </p>
           <div className="flex items-center space-x-2 text-white/80 text-xs">
             <FaLeaf />
-            <span>Bahan pilihan & halal</span>
+            <span>Bahan Pilihan & Halal</span>
             <FaHeart className="animate-pulse" />
           </div>
           <div className="flex space-x-2 pt-1">
@@ -66,25 +66,25 @@ const Footer = () => {
           <div className="space-y-1 text-white/90 text-sm">
             <div className="flex items-center gap-2">
               <FaWhatsapp className="text-base" />
-              <span>0851 0651 1818</span>
+              <span>0857 9022 0407</span>
             </div>
             <div className="flex items-center gap-2">
               <FaPhoneAlt className="text-base" />
-              <span>(0274) 865829</span>
+              <span>0857 9022 0407</span>
             </div>
             <div className="flex items-center gap-2">
               <FaInstagram className="text-base" />
-              <span>@saridewicatering_jogja</span>
+              <span>@dandanggulo.crb</span>
             </div>
             <div className="flex items-center gap-2">
               <FaEnvelope className="text-base" />
-              <span>cvsaridewimalika22@gmail.com</span>
+              <span>\@gmail.com</span>
             </div>
             <div className="flex items-start gap-2">
               <FaMapMarkerAlt className="text-base mt-1" />
               <span className="leading-snug">
-                Jl. Magelang KM.10, Josari, Tridadi<br />
-                Kec. Sleman, Kab. Sleman, DIY 55511
+                Jl. Cisadane, Pereng, Mejayan<br />
+                Kec. Mejayan, Kab. Madiun, Jawa Timur 63153
               </span>
             </div>
           </div>
@@ -96,7 +96,7 @@ const Footer = () => {
         <div className="flex items-center space-x-1 text-white/80 mb-1 md:mb-0">
           <span>Made with</span>
           <FaHeart className="text-white animate-pulse" />
-          <span>in Yogyakarta</span>
+          <span>in Madiun</span>
         </div>
         <div className="text-white/80 text-right">
           <p>© 2025 <span className="font-semibold text-white font-serif">Dandanggulo Catering</span></p>

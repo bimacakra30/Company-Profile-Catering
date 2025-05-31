@@ -19,15 +19,15 @@ export default function Gallery() {
   }, []);
 
   return (
-    <section className="py-24 bg-[#f7f3e8] relative">
+    <section className="py-24 relative" style={{ backgroundColor: '#f8f5f0' }}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Galeri</h2>
+          <h2 className="text-4xl font-bold mb-4 tracking-wide" style={{ color: '#4a5d3a' }}>Galeri</h2>
           <p className="text-[#205e2e] italic text-lg font-light">Kumpulan Momen Spesial Bersama Dandanggulo</p>
           <div className="flex justify-center mt-6">
-            <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
-            <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
-            <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
+            <div className="w-20 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
+            <div className="w-8 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
+            <div className="w-4 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
           </div>
         </div>
 

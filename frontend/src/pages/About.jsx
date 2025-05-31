@@ -7,7 +7,7 @@ export default function About() {
       <div className="absolute top-10 right-1/4 w-2 h-2 bg-[#205e2e] rounded-full opacity-60 animate-pulse delay-1000"></div>
 
       <div className="relative z-10">
-        <h2 className="text-5xl font-bold text-[#434f2a] mb-3 tracking-wide">Tentang kami</h2>
+        <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Tentang kami</h2>
         <p className="text-[#205e2e] italic text-lg font-light">Masakan Rumahan Penuh Kehangatan</p>
         <div className="flex justify-center mt-6 space-x-1.5">
           <div className="w-20 h-1 bg-[#434f2a] rounded-full"></div>

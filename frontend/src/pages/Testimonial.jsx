@@ -71,8 +71,8 @@ const Testimonial = () => {
       <div className="max-w-6xl mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-[#434f2a] mb-4">Testimoni Pelanggan</h1>
-          <p className="text-lg text-[#205e2e] italic max-w-2xl mx-auto">
+          <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Testimoni Pelanggan</h1>
+          <p className="text-[#205e2e] italic text-lg font-light">
             Kepuasan pelanggan adalah kebanggaan kami. Dengarkan cerita mereka tentang pengalaman bersama Dandanggulo.
           </p>
         </div>

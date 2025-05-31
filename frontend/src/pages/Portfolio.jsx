@@ -22,8 +22,8 @@ export default function Portfolio() {
         <section className="py-24 bg-[#f7f3e8] relative">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
-                    <h2 className="text-5xl font-bold text-[#434f2a] mb-4">Portofolio</h2>
-                    <p className="text-[#205e2e] italic text-lg">Dokumentasi Aktivitas dan Momen Terbaik Kami</p>
+                    <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Portofolio</h2>
+                    <p className="text-[#205e2e] italic text-lg font-light">Dokumentasi Aktivitas dan Momen Terbaik Kami</p>
                     <div className="flex justify-center mt-6">
                         <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
                         <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>

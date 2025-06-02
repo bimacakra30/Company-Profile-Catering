@@ -134,22 +134,17 @@ export default function MenuByCategory() {
                   key={product.id_product}
                   className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden group"
                 >
-                  {/* Gambar */}
-                  <div className="relative overflow-hidden h-48">
-                    <img
-                      src={product.path_image ? `http://127.0.0.1:8000/storage/${product.path_image}` : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu"}
-                      alt={product.name_product}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
-                      onClick={() => openModal(product)}
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu";
-                      }}
-                      onLoad={(e) => {
-                        // Pastikan gambar ter-load dengan benar
-                        e.target.style.opacity = '1';
-                      }}
-                      style={{ opacity: '0', transition: 'opacity 0.3s ease' }}
+                  {/* Gambar */}
+                  <div className="relative overflow-hidden h-48">
+                    <img
+                      src={product.path_image ? `http://127.0.0.1:8000/storage/${product.path_image}` : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu"}
+                      alt={product.name_product}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
+                      onClick={() => openModal(product)}
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu";
+                      }}
                     />
                     {/* Price overlay */}
                     <div className="absolute top-3 right-3 px-3 py-1 rounded-full text-white text-sm font-semibold shadow-lg"

@@ -14,13 +14,17 @@ const Testimonial = () => {
   const [error, setError] = useState('');
 
   const fetchReviews = async () => {
-    try {
-      const response = await getReviews();
-      setReviews(response.data);
-    } catch (error) {
-      console.error('Gagal mengambil data:', error);
-    }
+  try {
+    const response = await getReviews();
+    const sortedReviews = response.data.sort(
+      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+    );
+    setReviews(sortedReviews);
+  } catch (error) {
+    console.error('Gagal mengambil data:', error);
+  }
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +42,7 @@ const Testimonial = () => {
       setName('');
       setReview('');
       setShowForm(false);
-      setCurrentPage(0); // Reset ke halaman pertama
+      setCurrentPage(0);
     } catch (err) {
       console.error(err);
       setError('Gagal mengirim ulasan. Cek koneksi atau format data.');
@@ -47,7 +51,6 @@ const Testimonial = () => {
     }
   };
 
-  // Paging logic
   const totalPages = Math.ceil(reviews.length / ITEMS_PER_PAGE);
   const paginatedReviews = reviews.slice(
     currentPage * ITEMS_PER_PAGE,
@@ -69,7 +72,6 @@ const Testimonial = () => {
   return (
     <div className="pt-20 min-h-screen bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8] py-12">
       <div className="max-w-6xl mx-auto px-4">
-        {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Testimoni Pelanggan</h1>
           <p className="text-[#205e2e] italic text-lg font-light">
@@ -77,7 +79,6 @@ const Testimonial = () => {
           </p>
         </div>
 
-        {/* Testimoni Grid */}
         {reviews.length === 0 ? (
           <div className="text-center text-gray-600">Belum ada testimoni.</div>
         ) : (
@@ -110,7 +111,6 @@ const Testimonial = () => {
           </div>
         )}
 
-        {/* Navigasi Halaman */}
         {totalPages > 1 && (
           <div className="flex justify-center items-center space-x-4 mb-10">
             <button
@@ -133,7 +133,6 @@ const Testimonial = () => {
           </div>
         )}
 
-        {/* Toggle Form */}
         <div className="flex justify-center mb-6">
           <button
             onClick={() => setShowForm(!showForm)}
@@ -144,7 +143,6 @@ const Testimonial = () => {
           </button>
         </div>
 
-        {/* Formulir Testimoni */}
         {showForm && (
           <div className="bg-white rounded-3xl shadow-xl p-8 border border-[#f7f3e8] mb-6 max-w-2xl mx-auto">
             <form onSubmit={handleSubmit} className="space-y-6">

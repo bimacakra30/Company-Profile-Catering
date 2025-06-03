@@ -2,7 +2,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 use App\Models\Product;
 use App\Models\Category;
 
@@ -18,6 +18,14 @@ class ProductController extends Controller
             'categories' => $categories,
         ]);
     }
+    public function latest(): JsonResponse
+    {
+        $latestProducts = Product::with(['category', 'user'])
+            ->orderByDesc('id_product') // urut dari id terbesar (produk terbaru)
+            ->take(4)
+            ->get();
 
-    // Tambahkan method lain sesuai kebutuhan (store, update, delete)
+        return response()->json($latestProducts);
+    }
+
 }

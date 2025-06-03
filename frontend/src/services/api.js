@@ -12,6 +12,7 @@ export const getCategories = () => api.get('/categories');
 export const getGalleries = () => api.get('/galleries');
 export const getPortfolios = () => api.get('/portfolios');
 export const getProducts = () => api.get('/products');
+export const getLatestProducts = () => api.get('/products/latest');
 export const getReviews = () => api.get('/reviews');
 export const postReview = (data) => api.post('/reviews', data);
 export const getMenusByCategory = (categoryId) =>

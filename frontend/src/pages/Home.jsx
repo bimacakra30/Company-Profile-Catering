@@ -1,25 +1,31 @@
 import { useEffect, useState } from "react";
-import { Check, Phone, Mail, Instagram, Facebook, ArrowRight, ChevronRight, Star, Award, Users, Clock, MapPin } from "lucide-react";
+import { Check, Phone, Mail, ArrowRight, ChevronRight, Star, Award, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { getReviews, getLatestProducts } from "../services/api";
+import slide1 from "../assets/slide/slide1.jpg";
+import slide2 from "../assets/slide/slide2.jpg";
+import slide3 from "../assets/slide/slide3.png";
+
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: "/api/placeholder/1200x600?text=Elegant+Catering+Setup",
+      image: slide1,
       title: "Selamat Datang di Sari Dewi Catering",
       description: "Solusi Catering Mewah dan Berkelas untuk Setiap Acara Istimewa Anda",
       cta: "Lihat Menu Kami"
     },
     {
-      image: "/api/placeholder/1200x600?text=Premium+Indonesian+Cuisine",
+      image: slide2,
       title: "Menu Eksklusif, Cita Rasa Premium",
       description: "Nikmati Hidangan Signature dengan Sentuhan Kuliner Terbaik",
       cta: "Pesan Sekarang"
     },
     {
-      image: "/api/placeholder/1200x600?text=Professional+Wedding+Service",
+      image: slide3,
       title: "Pelayanan Profesional yang Memukau",
       description: "Dedikasi Kami untuk Menjadikan Acara Anda Tak Terlupakan",
       cta: "Hubungi Kami"
@@ -33,7 +39,7 @@ export default function Home() {
       description: "Paket lengkap catering pernikahan dengan dekorasi elegan dan pelayanan premium"
     },
     {
-      icon: "🏢", 
+      icon: "🏢",
       title: "Corporate Event",
       description: "Solusi catering profesional untuk meeting, seminar, dan acara perusahaan"
     },
@@ -59,52 +65,27 @@ export default function Home() {
     }
   ];
 
-  const menuHighlights = [
-    {
-      category: "Nasi & Rice Box",
-      items: ["Nasi Gudeg Jogja", "Nasi Liwet Solo", "Nasi Kuning Komplit", "Rice Box Premium"],
-      image: "/api/placeholder/300x200?text=Nasi+Gudeg"
-    },
-    {
-      category: "Lauk Utama",
-      items: ["Ayam Bakar Bumbu Rujak", "Rendang Sapi Padang", "Ikan Bakar Kecap", "Sate Ayam Madura"],
-      image: "/api/placeholder/300x200?text=Ayam+Bakar"
-    },
-    {
-      category: "Sayuran & Lalap",
-      items: ["Gado-gado Jakarta", "Urap Sayuran", "Lalap Segar", "Tumis Kangkung"],
-      image: "/api/placeholder/300x200?text=Gado+Gado"
-    },
-    {
-      category: "Minuman & Dessert",
-      items: ["Es Teh Manis", "Jus Buah Segar", "Puding Buah", "Es Campur Jakarta"],
-      image: "/api/placeholder/300x200?text=Minuman+Segar"
-    }
-  ];
+  const [highlightedProducts, setHighlightedProducts] = useState([]);
 
-  const testimonials = [
-    {
-      name: "Budi Santoso",
-      event: "Pernikahan",
-      rating: 5,
-      comment: "Pelayanan luar biasa! Menu yang disajikan sangat lezat dan presentasi yang elegan. Tamu undangan semua puas!",
-      location: "Sleman, Yogyakarta"
-    },
-    {
-      name: "Siti Nurhaliza",
-      event: "Corporate Event",
-      rating: 5,
-      comment: "Profesional dan tepat waktu. Menu yang bervariasi dan sesuai dengan budget perusahaan. Sangat recommended!",
-      location: "Bantul, Yogyakarta"
-    },
-    {
-      name: "Ahmad Wijaya", 
-      event: "Ulang Tahun",
-      rating: 5,
-      comment: "Acara ulang tahun anak saya jadi berkesan. Menu anak-anak yang disediakan sangat disukai. Terima kasih!",
-      location: "Jogja Kota"
-    }
-  ];
+  useEffect(() => {
+    getLatestProducts()
+      .then(res => setHighlightedProducts(res.data))
+      .catch(err => console.error("Gagal memuat produk terbaru:", err));
+  }, []);
+
+
+  const [latestReviews, setLatestReviews] = useState([]);
+
+  useEffect(() => {
+    getReviews()
+      .then(res => {
+        const sorted = res.data
+          .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          .slice(0, 3);
+        setLatestReviews(sorted);
+      })
+      .catch(err => console.error("Gagal memuat review:", err));
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -112,6 +93,9 @@ export default function Home() {
     }, 6000);
     return () => clearInterval(interval);
   }, [slides.length]);
+
+  const slugify = (name) =>
+    name.toLowerCase().replace(/\s+/g, '-');
 
   return (
     <div className="font-serif">
@@ -121,9 +105,8 @@ export default function Home() {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+                }`}
             >
               <img
                 src={slide.image}
@@ -169,9 +152,8 @@ export default function Home() {
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
+                }`}
             />
           ))}
         </div>
@@ -215,8 +197,8 @@ export default function Home() {
                 Sari Dewi Catering
               </h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Dengan pengalaman lebih dari 10 tahun, Sari Dewi Catering telah menjadi pilihan utama 
-                untuk berbagai acara istimewa di Yogyakarta dan sekitarnya. Kami menghadirkan cita rasa 
+                Dengan pengalaman lebih dari 10 tahun, Sari Dewi Catering telah menjadi pilihan utama
+                untuk berbagai acara istimewa di Yogyakarta dan sekitarnya. Kami menghadirkan cita rasa
                 autentik Indonesia dengan sentuhan modern dan pelayanan profesional.
               </p>
               <div className="space-y-3 mb-8">
@@ -311,37 +293,39 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {menuHighlights.map((menu, index) => (
-              <div key={index} className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+            {highlightedProducts.map((product) => (
+              <Link
+                to={`/menu/${slugify(product.category.name_category)}`}
+                key={product.id_product}
+                className="group bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 block"
+              >
                 <div className="relative overflow-hidden">
                   <img
-                    src={menu.image}
-                    alt={menu.category}
+                    src={
+                      product.path_image
+                        ? `http://127.0.0.1:8000/storage/${product.path_image}`
+                        : "https://via.placeholder.com/300x200/5d7c47/ffffff?text=Dandanggulo+Menu"
+                    }
+                    alt={product.name_product}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#434f2a] mb-4">{menu.category}</h3>
-                  <ul className="space-y-2">
-                    {menu.items.map((item, itemIndex) => (
-                      <li key={itemIndex} className="text-gray-600 flex items-center">
-                        <div className="w-2 h-2 bg-[#205e2e] rounded-full mr-3"></div>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
+                  <h3 className="text-xl font-bold text-[#434f2a] mb-2">
+                    {product.name_product}
+                  </h3>
+                  <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                    {product.description}
+                  </p>
+                  <p className="text-sm font-semibold text-[#205e2e]">
+                    Rp {Number(product.price_product).toLocaleString("id-ID")}
+                  </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <button className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-10 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center mx-auto">
-              Lihat Menu Lengkap
-              <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-            </button>
-          </div>
         </div>
       </section>
 
@@ -361,23 +345,31 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {latestReviews.map((review, index) => (
               <div key={index} className="bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                 <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
+                  {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
                   ))}
                 </div>
                 <p className="text-gray-700 mb-6 italic leading-relaxed">
-                  "{testimonial.comment}"
+                  "{review.review_text}"
                 </p>
                 <div className="border-t border-gray-200 pt-4">
-                  <div className="font-bold text-[#434f2a]">{testimonial.name}</div>
-                  <div className="text-sm text-[#205e2e] font-medium">{testimonial.event}</div>
-                  <div className="text-sm text-gray-500 flex items-center mt-1">
-                    <MapPin className="w-4 h-4 mr-1" />
-                    {testimonial.location}
+                  <div className="font-bold text-[#434f2a]">{review.customer_name}</div>
+                  <div className="text-sm text-gray-500">
+                    {new Date(review.created_at).toLocaleDateString('id-ID', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
                   </div>
+                  {review.respon_text && (
+                    <div className="mt-2 text-sm italic bg-green-50 p-3 rounded">
+                      <span className="font-semibold text-green-800">Balasan dari <i>Bima Cakra</i>:</span><br />
+                      "{review.respon_text}"
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

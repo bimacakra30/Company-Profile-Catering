@@ -22,4 +22,9 @@ class Gallery extends Authenticatable
 {
     return $this->belongsTo(User::class, 'id_user');
 }
+public function images()
+{
+    return $this->hasMany(\App\Models\GalleryImage::class, 'id_gallery', 'id_gallery');
+}
+
 }

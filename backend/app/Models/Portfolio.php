@@ -15,11 +15,21 @@ class Portfolio extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'path_image', 'name_activity' ,'description', 'date_activity', 'id_user'
+        'path_image',
+        'name_activity',
+        'description',
+        'date_activity',
+        'id_user'
     ];
 
+    public function images()
+    {
+        return $this->hasMany(\App\Models\PortfolioImage::class, 'id_portfolio', 'id_portfolio');
+    }
+
     public function user()
-{
-    return $this->belongsTo(User::class, 'id_user');
-}
+    {
+        return $this->belongsTo(\App\Models\User::class, 'id_user', 'id_user');
+    }
+
 }

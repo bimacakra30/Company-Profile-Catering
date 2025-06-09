@@ -74,23 +74,28 @@ export default function Portfolio() {
                 )}
             </div>
 
-            {/* Modal Full Info */}
+            {/* Modal Preview */}
             {selectedItem && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center px-4"
-                    onClick={() => setSelectedItem(null)}
-                >
+                <div className="fixed inset-0 flex items-center justify-center z-50 p-4">
                     <div
-                        className="bg-white max-w-3xl w-full rounded-lg overflow-hidden shadow-xl"
+                        className="bg-white max-w-2xl w-full rounded-lg overflow-hidden shadow-xl"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <img
-                            src={`http://127.0.0.1:8000/storage/${selectedItem.path_image}`}
-                            alt={selectedItem.name_activity}
-                            className="w-full h-96 object-cover"
-                        />
+                        <div className="relative">
+                            <img
+                                src={`http://127.0.0.1:8000/storage/${selectedItem.path_image}`}
+                                alt={selectedItem.name_activity}
+                                className="w-full h-64 object-cover"
+                            />
+                            <button
+                                onClick={() => setSelectedItem(null)}
+                                className="absolute top-4 right-4 bg-[#434f2a] text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-[#2d391a] transition"
+                            >
+                                ✕
+                            </button>
+                        </div>
                         <div className="p-6">
-                            <h3 className="text-3xl font-bold text-[#434f2a] mb-3">
+                            <h3 className="text-2xl font-bold text-[#434f2a] mb-3">
                                 {selectedItem.name_activity}
                             </h3>
                             <p className="text-gray-700 mb-4">{selectedItem.description}</p>
@@ -101,14 +106,6 @@ export default function Portfolio() {
                                     year: "numeric",
                                 })}
                             </p>
-                            <div className="mt-6 text-right">
-                                <button
-                                    onClick={() => setSelectedItem(null)}
-                                    className="px-4 py-2 bg-[#434f2a] text-white rounded hover:bg-[#2d391a]"
-                                >
-                                    Tutup
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>

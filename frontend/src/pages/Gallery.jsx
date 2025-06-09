@@ -52,9 +52,9 @@ export default function Gallery() {
           <h2 className="text-4xl font-bold mb-4 tracking-wide" style={{ color: '#4a5d3a' }}>Galeri</h2>
           <p className="text-[#205e2e] italic text-lg font-light">Kumpulan Momen Spesial Bersama Dandanggulo</p>
           <div className="flex justify-center mt-6">
-            <div className="w-20 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
-            <div className="w-8 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
-            <div className="w-4 h-0.5 mx-2" style={{ backgroundColor: '#5d7c47' }}></div>
+                        <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
           </div>
         </div>
 

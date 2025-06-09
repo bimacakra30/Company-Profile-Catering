@@ -76,10 +76,10 @@ export default function About() {
           <p className="text-lg text-[#2d5016]/80 font-light italic max-w-xl mx-auto mb-4">
             Dari Dapur Keluarga untuk Keluarga Indonesia
           </p>
-          <div className="flex justify-center space-x-1.5">
-            <div className="w-16 h-0.5 bg-[#2d5016] rounded-full"></div>
-            <div className="w-8 h-0.5 bg-[#2d5016] rounded-full opacity-60"></div>
-            <div className="w-3 h-0.5 bg-[#2d5016] rounded-full opacity-40"></div>
+          <div className="flex justify-center mt-6">
+                        <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
           </div>
         </div>
       </section>
@@ -97,7 +97,7 @@ export default function About() {
           <div className="bg-white rounded-xl shadow-sm p-6 border border-[#2d5016]/10 mb-6">
             <p className="text-[#2d5016]/80 leading-relaxed text-center mb-4">
               Dandanggulo Catering dimulai dari <strong>dapur kecil rumah sederhana pada tahun 2018</strong>, 
-              ketika Bu Sari mulai memasak untuk tetangga dengan resep turun temurun keluarga. 
+              ketika Bu Ifa mulai memasak untuk tetangga dengan resep turun temurun keluarga. 
               Saat pandemi 2020, kami justru tumbuh melayani keluarga yang rindu cita rasa rumahan.
             </p>
             <p className="text-[#2d5016]/80 leading-relaxed text-center">

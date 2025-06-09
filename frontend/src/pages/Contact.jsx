@@ -14,10 +14,10 @@ export default function Contact() {
           <p className="text-[#205e2e] italic text-lg font-light">
             Hubungi Kami Kapan Saja
           </p>
-          <div className="flex justify-center mt-6 space-x-2">
-            <div className="w-24 h-1 bg-[#434f2a] rounded-full"></div>
-            <div className="w-12 h-1 bg-[#434f2a] rounded-full opacity-60"></div>
-            <div className="w-6 h-1 bg-[#434f2a] rounded-full opacity-40"></div>
+          <div className="flex justify-center mt-6">
+                        <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
           </div>
         </div>
 

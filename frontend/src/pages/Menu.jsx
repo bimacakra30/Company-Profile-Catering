@@ -81,7 +81,7 @@ export default function MenuByCategory() {
             {titleCase(slug)}
           </h1>
           <p className="text-[#205e2e] italic text-lg font-light max-w-2xl mx-auto">
-            Nikmati koleksi menu {titleCase(slug).toLowerCase()} terbaik dari Dandanggulo Catering dengan cita rasa yang tak terlupakan.
+            Nikmati Koleksi Menu {titleCase(slug)} Terbaik dari Dandanggulo Catering dengan Cita Rasa yang Tak Terlupakan
           </p>
           <div className="w-20 h-1 mx-auto mt-6 rounded-full" style={{ backgroundColor: '#5d7c47' }}></div>
         </div>

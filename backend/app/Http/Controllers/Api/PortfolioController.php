@@ -8,7 +8,9 @@ class PortfolioController extends Controller
 {
     public function index()
     {
-        $portfolios = Portfolio::with('user')->get();
+        $portfolios = Portfolio::with(['user', 'images'])->get();
+
         return response()->json($portfolios);
     }
 }
+

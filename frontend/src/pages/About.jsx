@@ -73,8 +73,8 @@ export default function About() {
           <h1 className="text-3xl md:text-4xl font-bold text-[#2d5016] mb-3">
             Dandanggulo Catering
           </h1>
-          <p className="text-lg text-[#2d5016]/80 italic max-w-xl mx-auto mb-4">
-            "Dari dapur keluarga untuk keluarga Indonesia"
+          <p className="text-lg text-[#2d5016]/80 font-light italic max-w-xl mx-auto mb-4">
+            Dari Dapur Keluarga untuk Keluarga Indonesia
           </p>
           <div className="flex justify-center space-x-1.5">
             <div className="w-16 h-0.5 bg-[#2d5016] rounded-full"></div>
@@ -85,16 +85,16 @@ export default function About() {
       </section>
 
       {/* Story Section */}
-      <section className="py-10 px-4">
+      <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-6">
-            <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-3">
+          <div className="text-center mb-4">
+            <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-2">
               📖 Kisah Perjalanan Kami
             </div>
-            <h2 className="text-2xl font-bold text-[#2d5016] mb-2">Cerita Dandanggulo</h2>
+            <h2 className="text-2xl font-bold text-[#2d5016] mb-1">Cerita Dandanggulo</h2>
           </div>
           
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#2d5016]/10 mb-8">
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#2d5016]/10 mb-6">
             <p className="text-[#2d5016]/80 leading-relaxed text-center mb-4">
               Dandanggulo Catering dimulai dari <strong>dapur kecil rumah sederhana pada tahun 2018</strong>, 
               ketika Bu Sari mulai memasak untuk tetangga dengan resep turun temurun keluarga. 
@@ -116,13 +116,13 @@ export default function About() {
       </section>
 
       {/* Values Section */}
-      <section className="py-10 px-4 bg-white/50">
+      <section className="py-8 px-4 bg-white/50">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-8">
-            <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-3">
+          <div className="text-center mb-6">
+            <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-2">
               ⭐ Nilai-Nilai Kami
             </div>
-            <h2 className="text-2xl font-bold text-[#2d5016] mb-2">Prinsip yang Kami Pegang Teguh</h2>
+            <h2 className="text-2xl font-bold text-[#2d5016] mb-1">Prinsip yang Kami Pegang Teguh</h2>
             <p className="text-[#2d5016]/70">
               Dalam setiap hidangan dan pelayanan
             </p>
@@ -145,9 +145,9 @@ export default function About() {
       </section>
 
       {/* Legal Documents Section */}
-      <section className="py-10 px-4">
+      <section className="py-8 px-4">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#2d5016]/10 mb-8">
+          <div className="bg-white rounded-xl shadow-sm p-6 border border-[#2d5016]/10 mb-6">
             <h3 className="text-xl font-bold text-[#434f2a] mb-6 text-center">🔐 Usaha Kami Telah Memiliki Izin Resmi</h3>
 
             <div className="grid grid-cols-3 gap-4 mb-6">
@@ -182,11 +182,11 @@ export default function About() {
 
           {/* Advantages Section */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-[#2d5016]/10">
-            <div className="text-center mb شش">
-              <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-3">
+            <div className="text-center mb-4">
+              <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-2">
                 ⭐ Keunggulan Kami
               </div>
-              <h3 className="text-xl font-bold text-[#2d5016] mb-2">Mengapa Memilih Dandanggulo?</h3>
+              <h3 className="text-xl font-bold text-[#2d5016] mb-1">Mengapa Memilih Dandanggulo?</h3>
             </div>
 
             <div className="grid md:grid-cols-3 gap-4">

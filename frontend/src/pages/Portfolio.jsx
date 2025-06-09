@@ -19,7 +19,7 @@ export default function Portfolio() {
     }, []);
 
     return (
-        <section className="py-24 bg-[#f7f3e8] relative">
+        <section className="py-24 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8] relative">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Portofolio</h2>
@@ -69,52 +69,50 @@ export default function Portfolio() {
                                     </p>
                                 </div>
                             </div>
-                ))}
+                        ))}
+                    </div>
+                )}
             </div>
-        )}
-        </div>
 
-      {/* Modal Full Info */ }
-    {
-        selectedItem && (
-            <div
-                className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center px-4"
-                onClick={() => setSelectedItem(null)}
-            >
+            {/* Modal Full Info */}
+            {selectedItem && (
                 <div
-                    className="bg-white max-w-3xl w-full rounded-lg overflow-hidden shadow-xl"
-                    onClick={(e) => e.stopPropagation()}
+                    className="fixed inset-0 bg-black bg-opacity-80 z-50 flex items-center justify-center px-4"
+                    onClick={() => setSelectedItem(null)}
                 >
-                    <img
-                        src={`http://127.0.0.1:8000/storage/${selectedItem.path_image}`}
-                        alt={selectedItem.name_activity}
-                        className="w-full h-96 object-cover"
-                    />
-                    <div className="p-6">
-                        <h3 className="text-3xl font-bold text-[#434f2a] mb-3">
-                            {selectedItem.name_activity}
-                        </h3>
-                        <p className="text-gray-700 mb-4">{selectedItem.description}</p>
-                        <p className="text-sm text-gray-500">
-                            {new Date(selectedItem.date_activity).toLocaleDateString("id-ID", {
-                                day: "2-digit",
-                                month: "long",
-                                year: "numeric",
-                            })}
-                        </p>
-                        <div className="mt-6 text-right">
-                            <button
-                                onClick={() => setSelectedItem(null)}
-                                className="px-4 py-2 bg-[#434f2a] text-white rounded hover:bg-[#2d391a]"
-                            >
-                                Tutup
-                            </button>
+                    <div
+                        className="bg-white max-w-3xl w-full rounded-lg overflow-hidden shadow-xl"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <img
+                            src={`http://127.0.0.1:8000/storage/${selectedItem.path_image}`}
+                            alt={selectedItem.name_activity}
+                            className="w-full h-96 object-cover"
+                        />
+                        <div className="p-6">
+                            <h3 className="text-3xl font-bold text-[#434f2a] mb-3">
+                                {selectedItem.name_activity}
+                            </h3>
+                            <p className="text-gray-700 mb-4">{selectedItem.description}</p>
+                            <p className="text-sm text-gray-500">
+                                {new Date(selectedItem.date_activity).toLocaleDateString("id-ID", {
+                                    day: "2-digit",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
+                            <div className="mt-6 text-right">
+                                <button
+                                    onClick={() => setSelectedItem(null)}
+                                    className="px-4 py-2 bg-[#434f2a] text-white rounded hover:bg-[#2d391a]"
+                                >
+                                    Tutup
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        )
-    }
-    </section >
-  );
+            )}
+        </section>
+    );
 }

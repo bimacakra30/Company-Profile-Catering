@@ -124,12 +124,12 @@ export default function Contact() {
         </div>
 
         {/* Service Hours */}
-        <div className="max-w-5 före:ml-auto">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
             <h3 className="text-xl font-bold text-[#434f2a] mb-2">Jam Operasional & Tempat</h3>
             <div className="w-12 h-1 bg-[#205e2e] mx-auto rounded-full"></div>
           </div>
-          <div className="grid md:grid-cols-3 gap-4 px-2">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 px-2">
             {[
               { hari: "Senin - Minggu", jam: "08:00 - 20:00 WIB", catatan: "Pelayanan Konsultasi dan Pemesanan di Dapur Dandanggulo" },
               { hari: "Senin - Minggu", jam: "17:00 - 21:00 WIB", catatan: "Buka Lapak di Jl. Mt. Haryono" },

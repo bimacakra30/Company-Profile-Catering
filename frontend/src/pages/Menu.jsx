@@ -73,7 +73,7 @@ export default function MenuByCategory() {
   }, [isModalOpen]);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f8f5f0' }}>
+    <div className="min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]" style={{ backgroundColor: '#f8f5f0' }}>
       {/* Header dengan warna background yang sama seperti website */}
       <div className="pt-32 pb-16 px-6">
         <div className="max-w-6xl mx-auto text-center">

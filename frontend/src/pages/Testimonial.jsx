@@ -70,7 +70,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8] py-12">
+    <div className="pt-20 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f0] py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Testimoni Pelanggan</h1>

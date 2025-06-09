@@ -27,7 +27,7 @@ export default function Gallery() {
   };
 
   return (
-    <section className="py-24 relative" style={{ backgroundColor: '#f8f5f0' }}>
+    <section className="py-24 relative min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 tracking-wide" style={{ color: '#4a5d3a' }}>Galeri</h2>

@@ -4,7 +4,7 @@ import { FaTiktok } from "react-icons/fa6";
 
 export default function Contact() {
   return (
-    <section className="py-24 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8]">
+    <section className="py-24 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-20">

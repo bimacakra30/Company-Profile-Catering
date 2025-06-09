@@ -19,7 +19,7 @@ export default function Portfolio() {
     }, []);
 
     return (
-        <section className="py-24 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
+        <section className="py-24 pt-20 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
             <div className="container mx-auto px-4">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Portofolio</h2>

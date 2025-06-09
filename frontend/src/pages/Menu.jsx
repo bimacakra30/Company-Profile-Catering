@@ -75,7 +75,7 @@ export default function MenuByCategory() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]" style={{ backgroundColor: '#f8f5f0' }}>
       {/* Header dengan warna background yang sama seperti website */}
-      <div className="pt-32 pb-16 px-6">
+      <div className="pt-20 pb-16 px-6">
         <div className="max-w-6xl mx-auto text-center">
           <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide" style={{ color: '#4a5d3a' }}>
             {titleCase(slug)}

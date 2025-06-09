@@ -27,7 +27,7 @@ export default function Gallery() {
   };
 
   return (
-    <section className="py-24 relative min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
+    <section className="py-24 pt-20 relative min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-4 tracking-wide" style={{ color: '#4a5d3a' }}>Galeri</h2>
@@ -61,8 +61,11 @@ export default function Gallery() {
                     }
                     alt={gallery.name_event || `Galeri ${gallery.id_gallery}`}
                     className="w-full h-32 object-cover transform group-hover:scale-105 transition duration-300"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image";
+                    }}
                   />
-
                   <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center opacity-0 group-hover:opacity-100 transition">
                     {gallery.name_event} {gallery.date && `| ${gallery.date}`}
                   </div>

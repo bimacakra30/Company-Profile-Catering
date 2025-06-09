@@ -14,17 +14,16 @@ const Testimonial = () => {
   const [error, setError] = useState('');
 
   const fetchReviews = async () => {
-  try {
-    const response = await getReviews();
-    const sortedReviews = response.data.sort(
-      (a, b) => new Date(b.created_at) - new Date(a.created_at)
-    );
-    setReviews(sortedReviews);
-  } catch (error) {
-    console.error('Gagal mengambil data:', error);
-  }
+    try {
+      const response = await getReviews();
+      const sortedReviews = response.data.sort(
+        (a, b) => new Date(b.created_at) - new Date(a.created_at)
+      );
+      setReviews(sortedReviews);
+    } catch (error) {
+      console.error('Gagal mengambil data:', error);
+    }
   };
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,7 +69,7 @@ const Testimonial = () => {
   }, []);
 
   return (
-    <div className="pt-20 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f0] py-12">
+    <div className="pt-20 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0] py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Testimoni Pelanggan</h1>

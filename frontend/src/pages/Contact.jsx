@@ -4,7 +4,7 @@ import { FaTiktok } from "react-icons/fa6";
 
 export default function Contact() {
   return (
-    <section className="py-24 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
+    <section className="py-24 pt-20 min-h-screen bg-gradient-to-br from-[#fefdf8] to-[#f8f6f0]">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-20">
@@ -124,7 +124,7 @@ export default function Contact() {
         </div>
 
         {/* Service Hours */}
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5 före:ml-auto">
           <div className="text-center mb-8">
             <h3 className="text-xl font-bold text-[#434f2a] mb-2">Jam Operasional & Tempat</h3>
             <div className="w-12 h-1 bg-[#205e2e] mx-auto rounded-full"></div>

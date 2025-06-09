@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Check, Phone, Mail, ArrowRight, ChevronRight, Star, Award, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { getReviews, getLatestProducts, getCategories } from "../services/api";
+import { getReviews, getLatestProducts, getCategories, BASE_IMAGE_URL } from "../services/api";
 import slide1 from "../assets/slide/slide1.jpg";
 import slide2 from "../assets/slide/slide2.jpg";
 import slide3 from "../assets/slide/slide3.png";
@@ -339,7 +339,7 @@ export default function Home() {
                   <img
                     src={
                       product.path_image
-                        ? `http://127.0.0.1:8000/storage/${product.path_image}`
+                        ? `${BASE_IMAGE_URL}${product.path_image}`
                         : "https://via.placeholder.com/300x200/5d7c47/ffffff?text=Dandanggulo+Menu"
                     }
                     alt={product.name_product}

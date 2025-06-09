@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { getProducts } from "../services/api";
+import { getProducts, BASE_IMAGE_URL } from "../services/api";
 
 export default function MenuByCategory() {
   const { slug } = useParams();
@@ -137,7 +137,7 @@ export default function MenuByCategory() {
                   {/* Gambar */}
                   <div className="relative overflow-hidden h-48">
                     <img
-                      src={product.path_image ? `http://127.0.0.1:8000/storage/${product.path_image}` : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu"}
+                      src={product.path_image ? `${BASE_IMAGE_URL}${product.path_image}` : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=Dandanggulo+Menu"}
                       alt={product.name_product}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 cursor-pointer"
                       onClick={() => openModal(product)}
@@ -246,7 +246,7 @@ export default function MenuByCategory() {
                   <div className="space-y-4">
                     <div className="w-full aspect-[4/3] bg-gray-100 rounded-lg overflow-hidden shadow-md">
                       <img
-                        src={selectedProduct.path_image ? `http://127.0.0.1:8000/storage/${selectedProduct.path_image}` : "https://via.placeholder.com/600x450/5d7c47/ffffff?text=Dandanggulo+Menu"}
+                        src={selectedProduct.path_image ? `${BASE_IMAGE_URL}${selectedProduct.path_image}` : "https://via.placeholder.com/600x450/5d7c47/ffffff?text=Dandanggulo+Menu"}
                         alt={selectedProduct.name_product}
                         className="w-full h-full object-cover"
                         onError={(e) => {

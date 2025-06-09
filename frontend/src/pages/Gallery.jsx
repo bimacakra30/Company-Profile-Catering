@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGalleries } from "../services/api";
+import { getGalleries, BASE_IMAGE_URL } from "../services/api";
 
 export default function Gallery() {
   const [galleries, setGalleries] = useState([]);
@@ -69,24 +69,36 @@ export default function Gallery() {
               return (
                 <div
                   key={gallery.id_gallery}
-                  className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer"
+                  className="flex flex-col overflow-hidden rounded-lg shadow-md cursor-pointer bg-white transition-transform transform hover:scale-105"
                   onClick={() => openPreview(gallery)}
                 >
                   <img
                     src={
                       coverImage
-                        ? `http://127.0.0.1:8000/storage/${coverImage}`
+                        ? '${BASE_IMAGE_URL}${coverImage}'
                         : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image"
                     }
                     alt={gallery.name_event || `Galeri ${gallery.id_gallery}`}
-                    className="w-full h-32 object-cover transform group-hover:scale-105 transition duration-300"
+                    className="w-full h-56 object-cover"
                     onError={(e) => {
                       e.target.onerror = null;
                       e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image";
                     }}
                   />
-                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center opacity-0 group-hover:opacity-100 transition">
-                    {gallery.name_event} {gallery.date && `| ${gallery.date}`}
+                  <div className="p-4 flex flex-col flex-grow">
+                    {gallery.name_event && (
+                      <p className="text-lg font-semibold text-gray-800 mb-1">{gallery.name_event}</p>
+                    )}
+                    {gallery.date && (
+                      <p className="text-sm text-gray-500">
+                        {new Date(gallery.date).toLocaleDateString('id-ID', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        })}
+                      </p>
+                    )}
                   </div>
                 </div>
               );
@@ -96,107 +108,68 @@ export default function Gallery() {
       </div>
 
       {/* Modal Preview */}
-      {previewGallery && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+{previewGallery && (
+  <div
+    className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
+    onClick={closePreview}
+  >
+    <div
+      className="relative max-w-6xl w-full bg-white rounded-lg overflow-hidden shadow-2xl flex flex-col items-center justify-center p-6"
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Header dengan tombol close */}
+      <div className="absolute top-4 right-4 z-10">
+        <button
           onClick={closePreview}
+          className="bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
         >
-          <div 
-            className="relative max-w-6xl w-full bg-white rounded-lg overflow-hidden shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Header dengan tombol close */}
-            <div className="absolute top-4 right-4 z-10">
+          ✕
+        </button>
+      </div>
+
+      {/* Slider Gambar */}
+      {previewGallery.images && previewGallery.images.length > 0 ? (
+        <div className="relative w-full flex items-center justify-center" style={{ height: '75vh' }}>
+          <img
+            src={`${BASE_IMAGE_URL}${previewGallery.images[currentImageIndex].path_image}`}
+            alt={`Image ${previewGallery.images[currentImageIndex].id_image}`}
+            className="max-w-full max-h-full object-contain rounded-lg transition-transform duration-300"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image";
+            }}
+          />
+          {/* Navigation Buttons */}
+          {previewGallery.images.length > 1 && (
+            <>
               <button
-                onClick={closePreview}
-                className="bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
+                onClick={prevImage}
+                className="absolute left-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-70 transition text-xl"
               >
-                ✕
+                ←
               </button>
-            </div>
-
-            <div className="flex flex-col lg:flex-row">
-              {/* Slider Gambar */}
-              <div className="lg:w-2/3 p-6 relative">
-                {previewGallery.images && previewGallery.images.length > 0 ? (
-                  <div className="relative w-full h-[60vh] flex items-center justify-center">
-                    <img
-                      src={`http://127.0.0.1:8000/storage/${previewGallery.images[currentImageIndex].path_image}`}
-                      alt={`Image ${previewGallery.images[currentImageIndex].id_image}`}
-                      className="w-full h-full object-contain rounded-lg transition-transform duration-300"
-                      onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image";
-                      }}
-                    />
-                    {/* Navigation Buttons */}
-                    {previewGallery.images.length > 1 && (
-                      <>
-                        <button
-                          onClick={prevImage}
-                          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
-                        >
-                          ←
-                        </button>
-                        <button
-                          onClick={nextImage}
-                          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
-                        >
-                          →
-                        </button>
-                      </>
-                    )}
-                    {/* Image Counter */}
-                    <div className="absolute bottom-4 text-white bg-black bg-opacity-50 px-3 py-1 rounded-full">
-                      {currentImageIndex + 1} / {previewGallery.images.length}
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-gray-500 text-center h-[60vh] flex items-center justify-center">
-                    Tidak ada gambar.
-                  </p>
-                )}
-              </div>
-
-              {/* Detail Informasi */}
-              <div className="lg:w-1/3 p-6 bg-gray-50">
-                <h3 className="text-2xl font-bold mb-4" style={{ color: '#4a5d3a' }}>
-                  Galeri
-                </h3>
-
-                <div className="space-y-4">
-                  {previewGallery.name_event && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Nama Event
-                      </label>
-                      <p className="text-gray-800 bg-white p-2 rounded border">
-                        {previewGallery.name_event}
-                      </p>
-                    </div>
-                  )}
-
-                  {previewGallery.date && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Tanggal
-                      </label>
-                      <p className="text-gray-800 bg-white p-2 rounded border">
-                        {new Date(previewGallery.date).toLocaleDateString('id-ID', {
-                          weekday: 'long',
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric'
-                        })}
-                      </p>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
+              <button
+                onClick={nextImage}
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-opacity-70 transition text-xl"
+              >
+                →
+              </button>
+            </>
+          )}
+          {/* Image Counter */}
+          <div className="absolute bottom-4 text-white bg-black bg-opacity-50 px-4 py-2 rounded-full text-sm">
+            {currentImageIndex + 1} / {previewGallery.images.length}
           </div>
         </div>
+      ) : (
+        <p className="text-gray-500 text-center h-[75vh] flex items-center justify-center">
+          Tidak ada gambar.
+        </p>
       )}
+    </div>
+  </div>
+)}
+
     </section>
   );
 }

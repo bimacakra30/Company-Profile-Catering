@@ -74,8 +74,13 @@ const Testimonial = () => {
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#434f2a] mb-4 tracking-wide">Testimoni Pelanggan</h1>
           <p className="text-[#205e2e] italic text-lg font-light">
-            Kepuasan pelanggan adalah kebanggaan kami. Dengarkan cerita mereka tentang pengalaman bersama Dandanggulo.
+            Kepuasan Pelanggan adalah Kebanggaan Kami. Dengarkan Cerita Mereka Tentang Pengalaman Bersama Dandanggulo
           </p>
+          <div className="flex justify-center mt-6">
+                        <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
+                        <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
+          </div>
         </div>
 
         {reviews.length === 0 ? (

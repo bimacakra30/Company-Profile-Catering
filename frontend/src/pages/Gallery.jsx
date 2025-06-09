@@ -75,7 +75,7 @@ export default function Gallery() {
                   <img
                     src={
                       coverImage
-                        ? '${BASE_IMAGE_URL}${coverImage}'
+                        ? `${BASE_IMAGE_URL}${coverImage}`
                         : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image"
                     }
                     alt={gallery.name_event || `Galeri ${gallery.id_gallery}`}

@@ -139,14 +139,6 @@ export default function Home() {
           <div className="container mx-auto px-4">
             <div className="max-w-3xl text-white">
               <div className="mb-6">
-                <a
-                  href="https://wa.me/6285790220407"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block px-6 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium shadow-lg animate-pulse"
-                >
-                  ⭐ Premium Catering Service
-                </a>
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 {slides[currentSlide].title}
@@ -197,7 +189,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white">
+      <section className="py-12 bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group">
@@ -221,24 +213,24 @@ export default function Home() {
       </section>
 
       {/* About Preview Section */}
-      <section className="py-24 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8]">
+      <section className="py-16 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8]">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="mb-6">
+              <div className="mb-4">
                 <span className="inline-block px-4 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium">
                   🏆 Tentang Kami
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-4">
                 Dandanggulo Catering
               </h2>
-              <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+              <p className="text-lg text-gray-700 mb-4 leading-relaxed">
                 Dengan pengalaman lebih dari 8 tahun, Dandanggulo Catering telah menjadi pilihan utama
                 untuk berbagai acara istimewa di Madiun dan sekitarnya. Kami menghadirkan cita rasa
                 autentik Indonesia dengan sentuhan modern dan pelayanan profesional.
               </p>
-              <div className="space-y-3 mb-8">
+              <div className="space-y-3 mb-6">
                 <div className="flex items-center space-x-3">
                   <Check className="text-[#205e2e] bg-[#f7f3e8] rounded-full p-1" />
                   <span className="text-gray-700">Menu tradisional dan modern</span>
@@ -268,13 +260,13 @@ export default function Home() {
       </section>
 
       {/* Menu Tersedia Section */}
-      <section className="py-24 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="inline-block px-6 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium mb-4">
               🎉 Menu Tersedia
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-4">
               Berbagai Pilihan Menu
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -282,7 +274,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {loading ? (
               Array.from({ length: 3 }).map((_, index) => (
                 <div
@@ -296,20 +288,20 @@ export default function Home() {
               categories.map((category, index) => (
                 <div
                   key={index}
-                  className="group bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-[#f7f3e8]"
+                  className="group bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-6 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-[#f7f3e8]"
                 >
-                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+                  <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">
                     🍽️
                   </div>
-                  <h3 className="text-xl font-bold text-[#434f2a] mb-4">
+                  <h3 className="text-xl font-bold text-[#434f2a] mb-3">
                     {category.name_category}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm mb-4">
                     Pilihan menu {category.name_category.toLowerCase()} yang lezat dan cocok untuk berbagai acara.
                   </p>
                   <a
                     href={`/menu/${slugify(category.name_category)}`}
-                    className="mt-6 text-[#205e2e] font-semibold group-hover:underline flex items-center justify-center mx-auto"
+                    className="text-[#205e2e] font-semibold group-hover:underline flex items-center justify-center mx-auto"
                   >
                     Lihat Detail
                     <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -322,13 +314,13 @@ export default function Home() {
       </section>
 
       {/* Menu Highlights Section */}
-      <section ref={menuSectionRef} className="py-24 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8]">
+      <section ref={menuSectionRef} className="py-16 bg-gradient-to-b from-[#f7f3e8] via-white to-[#f7f3e8]">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="inline-block px-6 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium mb-4">
               🍽️ Menu Unggulan
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-4">
               Cita Rasa Terbaik Indonesia
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -336,7 +328,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {highlightedProducts.map((product) => (
               <Link
                 to={`/menu/${slugify(product.category.name_category)}`}
@@ -355,8 +347,8 @@ export default function Home() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-bold text-[#434f2a] mb-2">
+                <div className="p-5">
+                  <h3 className="text-lg font-bold text-[#434f2a] mb-2">
                     {product.name_product}
                   </h3>
                   <p className="text-gray-600 text-sm mb-3 line-clamp-2">
@@ -373,13 +365,13 @@ export default function Home() {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <span className="inline-block px-6 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium mb-4">
               ⭐ Testimoni
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-4">
               Kata Mereka Tentang Kami
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -387,20 +379,20 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {latestReviews.map((review, index) => (
-              <div key={index} className="bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
-                <div className="flex items-center mb-4">
+              <div key={index} className="bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
+                <div className="flex items-center mb-3">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-4 h-4 text-yellow-400 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-700 mb-6 italic leading-relaxed">
+                <p className="text-gray-700 mb-4 italic leading-relaxed text-sm">
                   "{review.review_text}"
                 </p>
-                <div className="border-t border-gray-200 pt-4">
-                  <div className="font-bold text-[#434f2a]">{review.customer_name}</div>
-                  <div className="text-sm text-gray-500">
+                <div className="border-t border-gray-200 pt-3">
+                  <div className="font-bold text-[#434f2a] text-sm">{review.customer_name}</div>
+                  <div className="text-xs text-gray-500">
                     {new Date(review.created_at).toLocaleDateString('id-ID', {
                       day: 'numeric',
                       month: 'long',
@@ -408,7 +400,7 @@ export default function Home() {
                     })}
                   </div>
                   {review.respon_text && (
-                    <div className="mt-2 text-sm italic bg-green-50 p-3 rounded">
+                    <div className="mt-2 text-xs italic bg-green-50 p-2 rounded">
                       <span className="font-semibold text-green-800">Balasan dari <i>Bima Cakra</i>:</span><br />
                       "{review.respon_text}"
                     </div>

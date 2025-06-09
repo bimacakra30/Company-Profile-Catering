@@ -14,7 +14,7 @@ export default function Home() {
   const slides = [
     {
       image: slide1,
-      title: "Selamat Datang di Sari Dewi Catering",
+      title: "Selamat Datang di Dandanggulo Catering",
       description: "Solusi Catering Mewah dan Berkelas untuk Setiap Acara Istimewa Anda",
       cta: "Lihat Menu Kami"
     },
@@ -139,7 +139,7 @@ export default function Home() {
                 </button>
                 <button className="group border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-[#434f2a] transition-all duration-300 flex items-center justify-center">
                   <FaWhatsapp className="mr-2" />
-                  0851 0651 1818
+                  0857 9022 0407
                 </button>
               </div>
             </div>
@@ -164,15 +164,15 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div className="group">
-              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">10+</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">8+</div>
               <div className="text-sm md:text-base opacity-90">Tahun Pengalaman</div>
             </div>
             <div className="group">
-              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">1000+</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">100+</div>
               <div className="text-sm md:text-base opacity-90">Acara Sukses</div>
             </div>
             <div className="group">
-              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">50+</div>
+              <div className="text-4xl md:text-5xl font-bold mb-2 group-hover:scale-110 transition-transform">20+</div>
               <div className="text-sm md:text-base opacity-90">Menu Pilihan</div>
             </div>
             <div className="group">
@@ -194,11 +194,11 @@ export default function Home() {
                 </span>
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
-                Sari Dewi Catering
+                Dandanggulo Catering
               </h2>
               <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-                Dengan pengalaman lebih dari 10 tahun, Sari Dewi Catering telah menjadi pilihan utama
-                untuk berbagai acara istimewa di Yogyakarta dan sekitarnya. Kami menghadirkan cita rasa
+                Dengan pengalaman lebih dari 8 tahun, Dandanggulo Catering telah menjadi pilihan utama
+                untuk berbagai acara istimewa di Madiun dan sekitarnya. Kami menghadirkan cita rasa
                 autentik Indonesia dengan sentuhan modern dan pelayanan profesional.
               </p>
               <div className="space-y-3 mb-8">

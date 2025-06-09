@@ -11,6 +11,7 @@ import {
   FaLeaf,
   FaStar,
 } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 import { getCategories } from "../services/api"; // gunakan service yang sama
 
 const Footer = () => {
@@ -36,13 +37,41 @@ const Footer = () => {
   const slugify = (text) =>
     text.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]+/g, "");
 
+  // Function to handle social media clicks
+  const handleSocialClick = (platform, username) => {
+    let url = "";
+    switch (platform) {
+      case "instagram":
+        url = `https://instagram.com/${username}`;
+        break;
+      case "facebook":
+        url = `https://facebook.com/${username}`;
+        break;
+      case "tiktok":
+        url = `https://tiktok.com/@${username}`;
+        break;
+      case "whatsapp":
+        url = `https://wa.me/6285790220407`;
+        break;
+      case "email":
+        url = `mailto:${username}`;
+        break;
+      case "phone":
+        url = `tel:+6285790220407`;
+        break;
+      default:
+        return;
+    }
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <footer className="bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white text-sm">
       <div className="max-w-7xl mx-auto px-4 py-6 grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Info */}
         <div className="md:col-span-5 space-y-2">
           <div className="flex items-center space-x-2">
-            <FaUtensils className="text-lg" />
+            <FaHeart className="text-lg" />
             <h2 className="text-lg font-bold font-serif">Dandanggulo Catering</h2>
           </div>
           <p className="text-white/90 text-sm leading-snug font-serif">
@@ -102,21 +131,47 @@ const Footer = () => {
             Hubungi Kami
           </h3>
           <div className="space-y-1 text-white/90 text-sm">
-            <div className="flex items-center gap-2">
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("whatsapp", "")}
+            >
               <FaWhatsapp className="text-base" />
-              <span>0857 9022 0407</span>
+              <span>0857 9022 0407 / 0819 4494 4755</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("phone", "")}
+            >
               <FaPhoneAlt className="text-base" />
-              <span>0857 9022 0407</span>
+              <span>0857 9022 0407 / 0819 4494 4755</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("instagram", "dandanggulo.crb")}
+            >
               <FaInstagram className="text-base" />
               <span>@dandanggulo.crb</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("facebook", "ifa dandanggulo")}
+            >
+              <FaFacebookF className="text-base" />
+              <span>@ifa dandanggulo</span>
+            </div>
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("tiktok", "nesia.team", "dandanggulo.85")}
+            >
+              <FaTiktok className="text-base" />
+              <span>@nesia.team / @dandanggulo.85</span>
+            </div>
+            <div 
+              className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors duration-200"
+              onClick={() => handleSocialClick("email", "dandanggulo@gmail.com")}
+            >
               <FaEnvelope className="text-base" />
-              <span>@gmail.com</span>
+              <span>dandanggulo@gmail.com</span>
             </div>
             <div className="flex items-start gap-2">
               <FaMapMarkerAlt className="text-base mt-1" />

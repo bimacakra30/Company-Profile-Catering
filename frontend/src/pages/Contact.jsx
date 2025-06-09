@@ -1,5 +1,6 @@
 import { Phone, Mail, MapPin } from "lucide-react";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaFacebookF, FaInstagram } from "react-icons/fa";
+import { FaTiktok } from "react-icons/fa6";
 
 export default function Contact() {
   return (
@@ -30,22 +31,37 @@ export default function Contact() {
                   📋 Informasi Kontak
                 </span>
               </div>
-              <div className="space-y-4 text-gray-800">
+              <div className="space-y-2 text-gray-800">
                 {[
                   {
                     icon: <FaWhatsapp className="text-white text-base" />,
                     title: "WhatsApp",
-                    text: "0857 9022 0407",
+                    text: "0857 9022 0407 / 0819 4494 4755",
                   },
                   {
                     icon: <Phone className="text-white h-4 w-4" />,
                     title: "Telepon",
-                    text: "0857 9022 0407",
+                    text: "0857 9022 0407 / 0819 4494 4755",
                   },
                   {
                     icon: <Mail className="text-white h-4 w-4" />,
                     title: "Email",
-                    text: "@yahoo.co.id",
+                    text: "dandanggulo@gmail.com",
+                  },
+                  {
+                    icon: <FaInstagram className="text-white text-base" />,
+                    title: "Instagram",
+                    text: "@dandanggulo.crb",
+                  },
+                  {
+                    icon: <FaFacebookF className="text-white text-base" />,
+                    title: "Facebook",
+                    text: "@ifa dandanggulo",
+                  },
+                  {
+                    icon: <FaTiktok className="text-white text-base" />,
+                    title: "TikTok",
+                    text: "@nesia.team / @dandanggulo.85",
                   },
                   {
                     icon: <MapPin className="text-white h-4 w-4" />,
@@ -90,15 +106,15 @@ export default function Contact() {
         </div>
 
         {/* CTA */}
-        <div className="text-center mb-10">
-          <div className="bg-gradient-to-r from-[#434f2a] to-[#205e2e] rounded-2xl p-6 text-white shadow relative">
+        <div className="flex justify-center mb-10">
+          <div className="bg-gradient-to-r from-[#434f2a] to-[#205e2e] rounded-2xl p-6 text-white shadow relative w-full max-w-4xl">
             <div className="relative z-10">
-              <div className="mb-2">
+              <div className="mb-2 text-center">
                 <span className="inline-block px-4 py-1 bg-[#f7f3e8] text-[#434f2a] rounded-full text-xs font-medium">
                   💬 Siap Melayani
                 </span>
               </div>
-              <p className="text-base leading-relaxed text-[#f7f3e8]">
+              <p className="text-base leading-relaxed text-[#f7f3e8] text-center">
                 <strong className="text-white">
                   Kami siap melayani kebutuhan catering Anda dengan pelayanan terbaik. Hubungi kami sekarang.
                 </strong>
@@ -110,14 +126,14 @@ export default function Contact() {
         {/* Service Hours */}
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8">
-            <h3 className="text-xl font-bold text-[#434f2a] mb-2">Jam Pelayanan</h3>
+            <h3 className="text-xl font-bold text-[#434f2a] mb-2">Jam Operasional & Tempat</h3>
             <div className="w-12 h-1 bg-[#205e2e] mx-auto rounded-full"></div>
           </div>
           <div className="grid md:grid-cols-3 gap-4 px-2">
             {[
-              { hari: "Senin - Jumat", jam: "08:00 - 20:00 WIB", catatan: "Pelayanan Konsultasi dan Pemesanan" },
-              { hari: "Sabtu", jam: "08:00 - 15:00 WIB", catatan: "Pelayanan Terbatas Konsultasi" },
-              { hari: "Minggu", jam: "Tersedia di CFD", catatan: "Buka Lapak di Caruban Fun Day" },
+              { hari: "Senin - Minggu", jam: "08:00 - 20:00 WIB", catatan: "Pelayanan Konsultasi dan Pemesanan di Dapur Dandanggulo" },
+              { hari: "Senin - Minggu", jam: "17:00 - 21:00 WIB", catatan: "Buka Lapak di Jl. Mt. Haryono" },
+              { hari: "Minggu", jam: "07:00 - 10:00 WIB", catatan: "Buka Lapak di Caruban Fun Day" },
             ].map((item, idx) => (
               <div
                 key={idx}

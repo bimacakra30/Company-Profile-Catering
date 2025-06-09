@@ -248,10 +248,12 @@ export default function Home() {
                   <span className="text-gray-700">Harga kompetitif</span>
                 </div>
               </div>
-              <button className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center">
-                Selengkapnya
-                <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
+             <Link to="/tentang">
+          <button className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center">
+            Selengkapnya
+            <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+          </button>
+        </Link>
             </div>
           </div>
         </div>

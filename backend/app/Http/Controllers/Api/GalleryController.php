@@ -6,9 +6,10 @@ use App\Models\Gallery;
 
 class GalleryController extends Controller
 {
-    public function index()
-    {
-        $galleries = Gallery::all();
-        return response()->json($galleries);
-    }
+public function index()
+{
+    $galleries = Gallery::with('images')->get();
+    return response()->json($galleries);
+}
+
 }

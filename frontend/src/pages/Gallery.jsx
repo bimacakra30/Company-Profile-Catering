@@ -2,15 +2,14 @@ import { useEffect, useState } from "react";
 import { getGalleries } from "../services/api";
 
 export default function Gallery() {
-  const [images, setImages] = useState([]);
+  const [galleries, setGalleries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [previewImage, setPreviewImage] = useState(null);
-  const [selectedImageData, setSelectedImageData] = useState(null);
+  const [previewGallery, setPreviewGallery] = useState(null);
 
   useEffect(() => {
     getGalleries()
       .then((res) => {
-        setImages(res.data.data ?? res.data);
+        setGalleries(res.data.data ?? res.data);
         setLoading(false);
       })
       .catch((err) => {
@@ -19,14 +18,12 @@ export default function Gallery() {
       });
   }, []);
 
-  const openPreview = (img) => {
-    setPreviewImage(`http://127.0.0.1:8000/storage/${img.path_image}`);
-    setSelectedImageData(img);
+  const openPreview = (gallery) => {
+    setPreviewGallery(gallery);
   };
 
   const closePreview = () => {
-    setPreviewImage(null);
-    setSelectedImageData(null);
+    setPreviewGallery(null);
   };
 
   return (
@@ -44,33 +41,40 @@ export default function Gallery() {
 
         {loading ? (
           <p className="text-center text-gray-600">Memuat galeri...</p>
-        ) : images.length === 0 ? (
+        ) : galleries.length === 0 ? (
           <p className="text-center text-gray-500">Belum ada gambar yang ditampilkan.</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {images.map((img) => (
-              <div
-                key={img.id_gallery}
-                className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer"
-                onClick={() => openPreview(img)}
-              >
-                <img
-                  src={`http://127.0.0.1:8000/storage/${img.path_image}`}
-                  alt={img.name_event || `Galeri ${img.id_gallery}`}
-                  className="w-full h-32 object-cover transform group-hover:scale-105 transition duration-300"
-                />
+            {galleries.map((gallery) => {
+              const coverImage = gallery.images?.[0]?.path_image;
+              return (
+                <div
+                  key={gallery.id_gallery}
+                  className="relative group overflow-hidden rounded-lg shadow-md cursor-pointer"
+                  onClick={() => openPreview(gallery)}
+                >
+                  <img
+                    src={
+                      coverImage
+                        ? `http://127.0.0.1:8000/storage/${coverImage}`
+                        : "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image"
+                    }
+                    alt={gallery.name_event || `Galeri ${gallery.id_gallery}`}
+                    className="w-full h-32 object-cover transform group-hover:scale-105 transition duration-300"
+                  />
 
-                <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center opacity-0 group-hover:opacity-100 transition">
-                  {img.name_event} {img.date && `| ${img.date}`}
+                  <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 text-white p-2 text-center opacity-0 group-hover:opacity-100 transition">
+                    {gallery.name_event} {gallery.date && `| ${gallery.date}`}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
       </div>
 
-      {/* Modal Preview dengan Detail */}
-      {previewImage && selectedImageData && (
+      {/* Modal Preview */}
+      {previewGallery && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
           onClick={closePreview}
@@ -90,13 +94,20 @@ export default function Gallery() {
             </div>
 
             <div className="flex flex-col lg:flex-row">
-              {/* Gambar */}
-              <div className="lg:w-2/3 relative">
-                <img
-                  src={previewImage}
-                  alt={selectedImageData.name_event || `Galeri ${selectedImageData.id_gallery}`}
-                  className="w-full h-64 lg:h-96 object-cover"
-                />
+              {/* Gambar grid */}
+              <div className="lg:w-2/3 p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[90vh]">
+                {previewGallery.images && previewGallery.images.length > 0 ? (
+                  previewGallery.images.map((img) => (
+                    <img
+                      key={img.id_image}
+                      src={`http://127.0.0.1:8000/storage/${img.path_image}`}
+                      alt={`Image ${img.id_image}`}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                  ))
+                ) : (
+                  <p className="text-gray-500 text-center col-span-full">Tidak ada gambar.</p>
+                )}
               </div>
 
               {/* Detail Informasi */}
@@ -104,26 +115,26 @@ export default function Gallery() {
                 <h3 className="text-2xl font-bold mb-4" style={{ color: '#4a5d3a' }}>
                   Galeri
                 </h3>
-                
+
                 <div className="space-y-4">
-                  {selectedImageData.name_event && (
+                  {previewGallery.name_event && (
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">
                         Nama Event
                       </label>
                       <p className="text-gray-800 bg-white p-2 rounded border">
-                        {selectedImageData.name_event}
+                        {previewGallery.name_event}
                       </p>
                     </div>
                   )}
 
-                  {selectedImageData.date && (
+                  {previewGallery.date && (
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">
                         Tanggal
                       </label>
                       <p className="text-gray-800 bg-white p-2 rounded border">
-                        {new Date(selectedImageData.date).toLocaleDateString('id-ID', {
+                        {new Date(previewGallery.date).toLocaleDateString('id-ID', {
                           weekday: 'long',
                           year: 'numeric',
                           month: 'long',
@@ -132,41 +143,6 @@ export default function Gallery() {
                       </p>
                     </div>
                   )}
-
-                  {selectedImageData.description && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Deskripsi
-                      </label>
-                      <p className="text-gray-800 bg-white p-2 rounded border">
-                        {selectedImageData.description}
-                      </p>
-                    </div>
-                  )}
-
-                  {selectedImageData.location && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Lokasi
-                      </label>
-                      <p className="text-gray-800 bg-white p-2 rounded border">
-                        {selectedImageData.location}
-                      </p>
-                    </div>
-                  )}
-
-                  {selectedImageData.photographer && (
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Fotografer
-                      </label>
-                      <p className="text-gray-800 bg-white p-2 rounded border">
-                        {selectedImageData.photographer}
-                      </p>
-                    </div>
-                  )}
-                  <div>
-                  </div>
                 </div>
               </div>
             </div>

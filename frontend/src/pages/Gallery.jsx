@@ -5,6 +5,7 @@ export default function Gallery() {
   const [galleries, setGalleries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [previewGallery, setPreviewGallery] = useState(null);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     getGalleries()
@@ -20,10 +21,28 @@ export default function Gallery() {
 
   const openPreview = (gallery) => {
     setPreviewGallery(gallery);
+    setCurrentImageIndex(0); // Reset to first image when opening preview
   };
 
   const closePreview = () => {
     setPreviewGallery(null);
+    setCurrentImageIndex(0); // Reset index when closing
+  };
+
+  const nextImage = () => {
+    if (previewGallery && previewGallery.images) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === previewGallery.images.length - 1 ? 0 : prevIndex + 1
+      );
+    }
+  };
+
+  const prevImage = () => {
+    if (previewGallery && previewGallery.images) {
+      setCurrentImageIndex((prevIndex) =>
+        prevIndex === 0 ? previewGallery.images.length - 1 : prevIndex - 1
+      );
+    }
   };
 
   return (
@@ -97,19 +116,45 @@ export default function Gallery() {
             </div>
 
             <div className="flex flex-col lg:flex-row">
-              {/* Gambar grid */}
-              <div className="lg:w-2/3 p-6 grid grid-cols-1 sm:grid-cols-2 gap-4 overflow-y-auto max-h-[90vh]">
+              {/* Slider Gambar */}
+              <div className="lg:w-2/3 p-6 relative">
                 {previewGallery.images && previewGallery.images.length > 0 ? (
-                  previewGallery.images.map((img) => (
+                  <div className="relative w-full h-[60vh] flex items-center justify-center">
                     <img
-                      key={img.id_image}
-                      src={`http://127.0.0.1:8000/storage/${img.path_image}`}
-                      alt={`Image ${img.id_image}`}
-                      className="w-full h-48 object-cover rounded-lg"
+                      src={`http://127.0.0.1:8000/storage/${previewGallery.images[currentImageIndex].path_image}`}
+                      alt={`Image ${previewGallery.images[currentImageIndex].id_image}`}
+                      className="w-full h-full object-contain rounded-lg transition-transform duration-300"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = "https://via.placeholder.com/400x300/5d7c47/ffffff?text=No+Image";
+                      }}
                     />
-                  ))
+                    {/* Navigation Buttons */}
+                    {previewGallery.images.length > 1 && (
+                      <>
+                        <button
+                          onClick={prevImage}
+                          className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
+                        >
+                          ←
+                        </button>
+                        <button
+                          onClick={nextImage}
+                          className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white w-10 h-10 rounded-full flex items-center justify-center hover:bg-opacity-70 transition"
+                        >
+                          →
+                        </button>
+                      </>
+                    )}
+                    {/* Image Counter */}
+                    <div className="absolute bottom-4 text-white bg-black bg-opacity-50 px-3 py-1 rounded-full">
+                      {currentImageIndex + 1} / {previewGallery.images.length}
+                    </div>
+                  </div>
                 ) : (
-                  <p className="text-gray-500 text-center col-span-full">Tidak ada gambar.</p>
+                  <p className="text-gray-500 text-center h-[60vh] flex items-center justify-center">
+                    Tidak ada gambar.
+                  </p>
                 )}
               </div>
 

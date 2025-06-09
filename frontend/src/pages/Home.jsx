@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { Check, Phone, Mail, ArrowRight, ChevronRight, Star, Award, MapPin } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { getReviews, getLatestProducts } from "../services/api";
+import { getReviews, getLatestProducts, getCategories } from "../services/api";
 import slide1 from "../assets/slide/slide1.jpg";
 import slide2 from "../assets/slide/slide2.jpg";
 import slide3 from "../assets/slide/slide3.png";
@@ -10,6 +10,10 @@ import slide3 from "../assets/slide/slide3.png";
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const menuSectionRef = useRef(null);
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [highlightedProducts, setHighlightedProducts] = useState([]);
+  const [latestReviews, setLatestReviews] = useState([]);
 
   const slides = [
     {
@@ -71,16 +75,36 @@ export default function Home() {
     }
   ];
 
-  const [highlightedProducts, setHighlightedProducts] = useState([]);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
+  const slugify = (name) => name.toLowerCase().replace(/\s+/g, '-');
+
+  // Fetch categories
+  useEffect(() => {
+    getCategories()
+      .then(res => {
+        setCategories(res.data.data ?? res.data); // Adjust based on your API response structure
+        setLoading(false);
+      })
+      .catch(err => {
+        console.error("Gagal memuat kategori:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  // Fetch highlighted products
   useEffect(() => {
     getLatestProducts()
       .then(res => setHighlightedProducts(res.data))
       .catch(err => console.error("Gagal memuat produk terbaru:", err));
   }, []);
 
-  const [latestReviews, setLatestReviews] = useState([]);
-
+  // Fetch latest reviews
   useEffect(() => {
     getReviews()
       .then(res => {
@@ -92,16 +116,6 @@ export default function Home() {
       .catch(err => console.error("Gagal memuat review:", err));
   }, []);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, [slides.length]);
-
-  const slugify = (name) =>
-    name.toLowerCase().replace(/\s+/g, '-');
-
   return (
     <div className="font-serif">
       {/* Hero Slider Section */}
@@ -110,8 +124,7 @@ export default function Home() {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
-                }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'}`}
             >
               <img
                 src={slide.image}
@@ -122,7 +135,6 @@ export default function Home() {
             </div>
           ))}
         </div>
-
         <div className="relative z-10 h-full flex items-center">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl text-white">
@@ -147,7 +159,6 @@ export default function Home() {
                   <Link
                     to={slides[currentSlide].action}
                     className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center z-20"
-                    onClick={() => console.log("Hubungi Kami button clicked, navigating to /kontak")}
                   >
                     {slides[currentSlide].cta}
                     <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" />
@@ -174,15 +185,12 @@ export default function Home() {
             </div>
           </div>
         </div>
-
-        {/* Slide Indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-3 z-20">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => setCurrentSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white w-8' : 'bg-white/50'
-                }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${index === currentSlide ? 'bg-white w-8' : 'bg-white/50'}`}
             />
           ))}
         </div>
@@ -248,46 +256,67 @@ export default function Home() {
                   <span className="text-gray-700">Harga kompetitif</span>
                 </div>
               </div>
-             <Link to="/tentang">
-          <button className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center">
-            Selengkapnya
-            <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
-          </button>
-        </Link>
+              <Link to="/tentang">
+                <button className="group bg-gradient-to-r from-[#434f2a] to-[#205e2e] text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 flex items-center">
+                  Selengkapnya
+                  <ChevronRight className="ml-2 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Section */}
+      {/* Menu Tersedia Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <span className="inline-block px-6 py-2 bg-[#205e2e] text-white rounded-full text-sm font-medium mb-4">
-              🎉 Layanan Kami
+              🎉 Menu Tersedia
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-[#434f2a] mb-6">
-              Berbagai Pilihan Acara
+              Berbagai Pilihan Menu
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Kami melayani berbagai jenis acara dengan menu dan paket yang disesuaikan dengan kebutuhan Anda
+              Kami menyediakan berbagai kategori hidangan sesuai kebutuhan dan selera Anda.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <div key={index} className="group bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-[#f7f3e8]">
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
-                  {service.icon}
+            {loading ? (
+              Array.from({ length: 3 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="bg-[#f7f3e8] rounded-3xl p-8 animate-pulse h-40"
+                />
+              ))
+            ) : categories.length === 0 ? (
+              <p className="text-center text-gray-500">Belum ada kategori menu tersedia.</p>
+            ) : (
+              categories.map((category, index) => (
+                <div
+                  key={index}
+                  className="group bg-gradient-to-br from-[#f7f3e8] to-white rounded-3xl p-8 text-center hover:shadow-2xl transition-all duration-300 hover:-translate-y-2 border border-[#f7f3e8]"
+                >
+                  <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
+                    🍽️
+                  </div>
+                  <h3 className="text-xl font-bold text-[#434f2a] mb-4">
+                    {category.name_category}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Pilihan menu {category.name_category.toLowerCase()} yang lezat dan cocok untuk berbagai acara.
+                  </p>
+                  <a
+                    href={`/menu/${slugify(category.name_category)}`}
+                    className="mt-6 text-[#205e2e] font-semibold group-hover:underline flex items-center justify-center mx-auto"
+                  >
+                    Lihat Detail
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
                 </div>
-                <h3 className="text-xl font-bold text-[#434f2a] mb-4">{service.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{service.description}</p>
-                <button className="mt-6 text-[#205e2e] font-semibold group-hover:underline flex items-center justify-center mx-auto">
-                  Lihat Detail
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>

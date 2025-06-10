@@ -13,7 +13,7 @@ export default function About() {
       title: 'Surat Izin Usaha Perdagangan',
       description: 'Dokumen resmi izin usaha perdagangan',
       icon: '🏢',
-      image: siupImg,
+      image: null,
     },
     {
       id: 'halal',
@@ -21,7 +21,7 @@ export default function About() {
       title: 'Sertifikat Halal',
       description: 'Sertifikat jaminan produk halal',
       icon: '✅',
-      image: halalImg,
+      image: null, // Contoh: dokumen belum diupload
     },
     {
       id: 'nib',
@@ -29,13 +29,13 @@ export default function About() {
       title: 'Nomor Induk Berusaha',
       description: 'Nomor identitas resmi usaha',
       icon: '📋',
-      image: nibImg,
+      image: null,
     },
   ];
 
   const values = [
     {
-      icon: '❤️',
+      icon: '❤',
       title: 'Kehangatan Keluarga',
       description: 'Setiap hidangan dibuat dengan cinta seperti memasak untuk keluarga sendiri'
     },
@@ -77,9 +77,9 @@ export default function About() {
             Dari Dapur Keluarga untuk Keluarga Indonesia
           </p>
           <div className="flex justify-center mt-6">
-                        <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
-                        <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
-                        <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
+            <div className="w-20 h-0.5 bg-[#434f2a] mx-2"></div>
+            <div className="w-8 h-0.5 bg-[#434f2a] mx-2"></div>
+            <div className="w-4 h-0.5 bg-[#434f2a] mx-2"></div>
           </div>
         </div>
       </section>
@@ -164,7 +164,6 @@ export default function About() {
               ))}
             </div>
 
-            {/* Legal Features */}
             <div className="grid md:grid-cols-3 gap-4">
               {[
                 ['🏆', 'Standar Tinggi', 'Memenuhi standar kualitas dan keamanan pangan'],
@@ -180,7 +179,6 @@ export default function About() {
             </div>
           </div>
 
-          {/* Advantages Section */}
           <div className="bg-white rounded-xl p-6 shadow-sm border border-[#2d5016]/10">
             <div className="text-center mb-4">
               <div className="inline-block px-3 py-1 bg-[#2d5016] text-white rounded-full text-xs font-semibold mb-2">
@@ -223,21 +221,27 @@ export default function About() {
             </div>
 
             <div className="w-full">
-              <img
-                src={selectedDocument.image}
-                alt={selectedDocument.name}
-                className="max-w-full max-h-[400px] mx-auto rounded shadow"
-              />
+              {selectedDocument.image ? (
+                <img
+                  src={selectedDocument.image}
+                  alt={selectedDocument.name}
+                  className="max-w-full max-h-[400px] mx-auto rounded shadow"
+                />
+              ) : (
+                <p className="text-center text-[#2d5016]/80 italic">Dokumen belum diupload</p>
+              )}
             </div>
 
             <div className="mt-4 flex justify-center gap-3">
-              <a
-                href={selectedDocument.image}
-                download={selectedDocument.name}
-                className="bg-[#434f2a] text-white px-4 py-1.5 rounded hover:bg-[#205e2e] text-sm"
-              >
-                Download
-              </a>
+              {selectedDocument.image && (
+                <a
+                  href={selectedDocument.image}
+                  download={selectedDocument.name}
+                  className="bg-[#434f2a] text-white px-4 py-1.5 rounded hover:bg-[#205e2e] text-sm"
+                >
+                  Download
+                </a>
+              )}
               <button
                 onClick={closeModal}
                 className="bg-gray-500 text-white px-4 py-1.5 rounded hover:bg-gray-600 text-sm"
@@ -248,6 +252,6 @@ export default function About() {
           </div>
         </div>
       )}
-    </div>
-  );
+    </div>
+  );
 }

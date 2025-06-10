@@ -110,12 +110,6 @@ export default function MenuByCategory() {
               Belum ada menu di kategori {titleCase(slug).toLowerCase()} saat ini.
               Silakan cek kategori lain atau hubungi kami untuk menu khusus.
             </p>
-            <button
-              className="px-6 py-3 text-white rounded-lg font-medium transition-colors duration-300 hover:opacity-90"
-              style={{ backgroundColor: '#5d7c47' }}
-            >
-              Hubungi Kami
-            </button>
           </div>
         ) : (
           <>

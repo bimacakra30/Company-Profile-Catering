@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://127.0.0.1/api/',
+  baseURL: 'https://admin.dandanggulo.com/api/',
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json',
   },
 });
 
-export const BASE_IMAGE_URL = 'http://127.0.0.1/storage/';
+export const BASE_IMAGE_URL = 'https://admin.dandanggulo.com/storage/';
 
 export const getCategories = () => api.get('/categories');
 export const getGalleries = () => api.get('/galleries');
